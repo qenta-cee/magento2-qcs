@@ -1,0 +1,64 @@
+
+body, button, input, select, table, textarea {
+    color: #636363;
+    font-family: "Open Sans","Helvetica Neue",Verdana,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.fieldlabel {
+    -moz-user-select: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    width: 200px;
+    color: #333;
+    float: none;
+}
+
+.fieldrow {
+    margin-top: 10px;
+}
+.clearer_yesno {
+    clear: both;
+}
+
+input {
+    background: #fff none repeat scroll 0 0 padding-box;
+    border: 1px solid #c2c2c2;
+    border-radius: 1px;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 32px;
+    line-height: 1.42857;
+    padding: 0 9px;
+    vertical-align: baseline;
+    width: 100%;
+}
+
+
+select {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    height: 32px;
+    padding-right: 25px;
+    text-indent: 0.01em;
+    text-overflow: "";
+}
+
+#cardholder {
+    width: 400px;
+}
+
+#pan {
+    width: 225px;
+}
+
+#cvc {
+    width: 80px;
+}
+
+#issueNumber {
+    width: 60px;
+}
