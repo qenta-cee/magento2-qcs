@@ -158,14 +158,6 @@
                                 Forwarding basket data to the respective financial service provider.
                             ]]></comment>
                 </field>
-
-                <field id="duplicaterequestcheck" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100">
-                    <label>Check for duplicate requests</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[
-                                Check for duplicate requests done by your consumer. <a href="https://guides.wirecard.at/request_parameters#duplicaterequestcheck" target="_blank">More information.</a>
-                            ]]></comment>
-                </field>
             </group>
 
             <group id="ccard" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">

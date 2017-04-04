@@ -261,10 +261,6 @@ abstract class AbstractPayment extends AbstractMethod
             $init->setFinancialInstitution($data->getData('financialInstitution'));
         }
 
-        if ($this->_dataHelper->getConfigData('options/duplicaterequestcheck')) {
-            $init->setDuplicateRequestCheck($this->_dataHelper->getConfigData('options/duplicaterequestcheck'));
-        }
-
         $init->quoteHash = $this->_dataHelper->calculateQuoteChecksum($quote);
 
         $this->setAdditionalRequestData($init, $cart);
