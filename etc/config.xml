@@ -46,7 +46,6 @@
                 <order_creation>after</order_creation>
                 <sendbillingdata>1</sendbillingdata>
                 <sendshippingdata>1</sendshippingdata>
-                <duplicaterequestcheck>1</duplicaterequestcheck>
             </options>
             <ccard>
                 <displaycardholder>1</displaycardholder>

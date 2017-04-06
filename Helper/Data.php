@@ -38,7 +38,7 @@ namespace Wirecard\CheckoutSeamless\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
-    protected $_pluginVersion = '1.0.0';
+    protected $_pluginVersion = '1.0.2';
     protected $_pluginName = 'Wirecard/CheckoutSeamless';
 
     /**
@@ -267,7 +267,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getClientIp()
     {
-        return $this->_request->getClientIp();
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) and $_SERVER['HTTP_X_FORWARDED_FOR']) {
+            if (strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ',')) {
+                $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+
+                return $ips[0];
+            } else {
+                return $_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+        }
+
+        return $_SERVER['REMOTE_ADDR'];
     }
 
     /**
@@ -404,59 +414,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         } else {
             $this->_logger->debug(__METHOD__ . ':' . print_r($response->getErrors(), true));
             return [];
-        }
-    }
-
-    public function initDataStorage()
-    {
-        $dataStorageInit = new \WirecardCEE_QMore_DataStorageClient($this->getConfigArray());
-
-        $dataStorageInit->setReturnUrl(Mage::getUrl('wirecard_checkoutseamless/processing/storereturn',
-            array('_secure' => true)));
-        $dataStorageInit->setOrderIdent(Mage::getSingleton('checkout/session')->getQuote()->getId());
-
-        $response = null;
-        if ($this->getConfigData('ccard/pci3_dss_saq_a_enable')) {
-            $dataStorageInit->setJavascriptScriptVersion('pci3');
-
-            if (strlen(trim($this->getConfigData('ccard/iframe_css_url')))) {
-                $dataStorageInit->setIframeCssUrl(trim($this->getConfigData('ccard/iframe_css_url')));
-            }
-
-            $dataStorageInit->setCreditCardCardholderNameField($this->getConfigData('ccard/showcardholder'));
-            $dataStorageInit->setCreditCardShowCvcField($this->getConfigData('ccard/showcvc'));
-            $dataStorageInit->setCreditCardShowIssueDateField($this->getConfigData('ccard/showissuedate'));
-            $dataStorageInit->setCreditCardShowIssueNumberField($this->getConfigData('ccard/showissuenumber'));
-        }
-
-        $this->_logger->debug(__METHOD__ . ':' . print_r($dataStorageInit->getRequestData(), true));
-
-        try {
-            $response = $dataStorageInit->initiate();
-
-            if (!$response->hasFailed()) {
-
-                Mage::getSingleton('checkout/session')->setWirecardCheckoutSeamlessStorageId($response->getStorageId());
-                $this->log(__METHOD__ . ':storageid:' . $response->getStorageId(), Zend_Log::DEBUG);
-
-                return $response;
-
-            } else {
-
-                $dsErrors = $response->getErrors();
-
-                foreach ($dsErrors as $error) {
-                    $this->log(__METHOD__ . ':' . $error->getMessage());
-                }
-
-                return false;
-            }
-        } catch (\Exception $e) {
-
-            //communication with dataStorage failed. we choose a none dataStorage fallback
-            $this->_logger->debug(__METHOD__ . ':' . $e->getMessage());
-
-            return false;
         }
     }
 }
