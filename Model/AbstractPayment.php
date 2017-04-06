@@ -152,7 +152,7 @@ abstract class AbstractPayment extends AbstractMethod
         $quote->save();
 
         $orderId = $quote->getReservedOrderId();
-        $init->setOrderReference(sprintf('%010d', $orderId));
+        $init->setOrderReference(sprintf('%010s', substr($orderId, -10)));
 
         $returnUrl = $urls['return'];
         $returnUrl .= strpos($urls['return'], '?') ? '&' : '?';
