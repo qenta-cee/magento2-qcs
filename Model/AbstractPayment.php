@@ -196,14 +196,8 @@ abstract class AbstractPayment extends AbstractMethod
                 $bitem->setDescription($item->getProduct()->getName());
                 $bitem->setImageUrl($baseUrl . "pub/media/catalog/product" . $item->getProduct()->getImage());
                 $bitem->setName($item->getProduct()->getName());
-                $bitem->setUnitGrossAmount(number_format($item->getPrice(), $precision, '.', ''));
-                $bitem->setUnitNetAmount(
-                    number_format(
-                        number_format($item->getPrice(), $precision, '.', '') - number_format(
-                            $item->getTaxAmount(), $precision, '.', ''
-                        ), $precision, '.', ''
-                    )
-                );
+                $bitem->setUnitGrossAmount(number_format($item->getPriceInclTax(), $precision, '.', ''));
+                $bitem->setUnitNetAmount(number_format($item->getPrice(), $precision, '.', ''));
                 $bitem->setUnitTaxAmount(number_format($item->getTaxAmount(), $precision, '.', ''));
                 $bitem->setUnitTaxRate(number_format($item->getTaxPercent(), $precision, '.', ''));
                 $basket->addItem($bitem, (int)$item->getQty());
@@ -216,16 +210,10 @@ abstract class AbstractPayment extends AbstractMethod
                 $bitem->setName('shipping');
                 $bitem->setDescription($quote->getShippingAddress()->getShippingDescription());
                 $bitem->setUnitGrossAmount(
-                    number_format($quote->getShippingAddress()->getShippingAmount(), $precision, '.', '')
+                    number_format($quote->getShippingAddress()->getShippingInclTax(), $precision, '.', '')
                 );
                 $bitem->setUnitNetAmount(
-                    number_format(
-                        number_format(
-                            $quote->getShippingAddress()->getShippingAmount(), $precision, '.', ''
-                        ) - number_format(
-                            $quote->getShippingAddress()->getShippingTaxAmount(), $precision, '.', ''
-                        ), $precision, '.', ''
-                    )
+                    number_format($quote->getShippingAddress()->getShippingAmount(), $precision, '.', '')
                 );
                 $bitem->setUnitTaxAmount(
                     number_format($quote->getShippingAddress()->getShippingTaxAmount(), $precision, '.', '')
