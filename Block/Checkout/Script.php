@@ -42,6 +42,15 @@ class Script extends Template
      */
     protected $_dataStorageHelper;
 
+    /**
+     * @var \Wirecard\CheckoutSeamless\Helper\Data
+     */
+    protected $_dataHelper;
+
+    /**
+     * @var \Magento\Quote\Model\Quote
+     */
+    protected $_checkoutSession;
 
     /**
      * Constructor
@@ -53,14 +62,30 @@ class Script extends Template
     public function __construct(
         Template\Context $context,
         \Wirecard\CheckoutSeamless\Helper\DataStorage $helper,
+        \Magento\Checkout\Model\Session $checkoutSession,
+        \Wirecard\CheckoutSeamless\Helper\Data $dataHelper,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->_dataStorageHelper = $helper;
+        $this->_checkoutSession = $checkoutSession;
+        $this->_dataHelper = $dataHelper;
     }
 
     public function getDataStorageUrl()
     {
         return $this->_dataStorageHelper->init();
+    }
+
+    public function getConsumerDeviceId()
+    {
+        if (!strlen($this->_checkoutSession->getData('consumerDeviceId'))) {
+            $customerId = $this->_dataHelper->getConfigArray()['CUSTOMER_ID'];
+            $consumerDeviceId = md5($customerId . "_" . microtime());
+
+            $this->_checkoutSession->setData('consumerDeviceId', $consumerDeviceId);
+        }
+
+        return $this->_checkoutSession->getData('consumerDeviceId');
     }
 }

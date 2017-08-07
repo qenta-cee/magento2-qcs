@@ -149,6 +149,7 @@ abstract class AbstractPayment extends AbstractMethod
         $init->setConfirmUrl($urls['confirm']);
 
         $quote->reserveOrderId();
+        $checkoutSession = $cart->getCheckoutSession();
         $quote->save();
 
         $orderId = $quote->getReservedOrderId();
@@ -170,12 +171,17 @@ abstract class AbstractPayment extends AbstractMethod
             ->setFailureUrl($returnUrl)
             ->setServiceUrl($this->_dataHelper->getConfigData('options/service_url'))
             ->setConsumerData($this->_getConsumerData($quote))
-            ->setStorageid($this->_dataStorageHelper->getStorageId())
+            ->setStorageId($this->_dataStorageHelper->getStorageId())
             ->setOrderIdent($quote->getId());
 
         $init->mage_orderId       = $orderId;
         $init->mage_quoteId       = $quote->getId();
         $init->mage_orderCreation = $this->_dataHelper->getConfigData('options/order_creation');
+
+        if (strlen($checkoutSession->getData('consumerDeviceId'))) {
+            $init->consumerDeviceId = $checkoutSession->getData('consumerDeviceId');
+            $checkoutSession->unsetData('consumerDeviceId');
+        }
 
         $init->generateCustomerStatement($this->_dataHelper->getConfigData('options/shopname'), sprintf('%010d', $orderId));
 
