@@ -956,14 +956,6 @@
                 <field id="max_order_total" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Maximum Order Total</label>
                 </field>
-                <field id="min_basket_size" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
-                <field id="max_basket_size" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
             </group>
 
             <group id="wirecard_checkoutseamless_invoiceb2b" translate="label" type="text" sortOrder="5200" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -1023,14 +1015,6 @@
                 </field>
                 <field id="max_order_total" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Maximum Order Total</label>
-                </field>
-                <field id="min_basket_size" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
-                <field id="max_basket_size" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
                 </field>
             </group>
 
@@ -1100,14 +1084,6 @@
                 </field>
                 <field id="max_order_total" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Maximum Order Total</label>
-                </field>
-                <field id="min_basket_size" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
-                <field id="max_basket_size" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
                 </field>
             </group>
 
