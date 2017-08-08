@@ -74,7 +74,7 @@ class Installment extends AbstractPayment
     /**
      * Determine method availability based on quote amount and config data
      *
-     * @param \Magento\Quote\Api\Data\CartInterface|null $quote
+     * @param \Magento\Quote\Model\Quote|\Magento\Quote\Api\Data\CartInterface|null $quote
      *
      * @return bool
      */
@@ -87,6 +87,10 @@ class Installment extends AbstractPayment
 
         if ($quote === null)
             return false;
+
+        if ($quote->hasVirtualItems()) {
+            return false;
+        }
 
         if ($this->getConfigData('provider') == 'ratepay') {
             return $this->_isAvailableRatePay($quote);

@@ -62,23 +62,17 @@ define(
                     additionalData = {};
 
                 additionalData.customerDob = this.customerDob();
+                console.log(additionalData);
 
                 return $.extend(true, parent, {'additional_data': additionalData});
-            },
-            getMinAge: function() {
-                if (!window.checkoutConfig.payment[this.getCode()])
-                    return 0;
-
-                return window.checkoutConfig.payment[this.getCode()].min_age
             },
             isB2B: function() {
                 return this.getCode() == 'wirecard_checkoutseamless_invoiceb2b';
             },
             validate: function () {
-                minAgeValidator.minage = this.getMinAge();
                 if (!this.isB2B() && !minAgeValidator.validate(this.customerDob())) {
                     var errorPane = $('#' + this.getCode() + '-dob-error');
-                    errorPane.html($t('You have to be %age% years or older to use this payment.'.replace('%age%', minAgeValidator.minage)));
+                    errorPane.html($t('You have to be 18 years or older to use this payment.'));
                     errorPane.css('display', 'block');
                     return false;
                 }

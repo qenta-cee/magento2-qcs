@@ -204,17 +204,6 @@ class ConfigProvider implements ConfigProviderInterface
             $config['payment'][Payment\Invoiceb2b::CODE]['consenttxt'] = sprintf($txt, $payolutionLink);
         }
 
-        $config['payment'][Payment\Invoice::CODE]['min_age']     = $this->methods[Payment\Invoice::CODE]->getConfigData('min_age');
-        $config['payment'][Payment\Installment::CODE]['min_age'] = $this->methods[Payment\Installment::CODE]->getConfigData('min_age');
-
-        if ($this->methods[Payment\Invoice::CODE]->getProvider() == 'payolution') {
-            $config['payment'][Payment\Invoice::CODE]['min_age'] = 18;
-        }
-
-        if ($this->methods[Payment\Installment::CODE]->getProvider() == 'payolution') {
-            $config['payment'][Payment\Installment::CODE]['min_age'] = 18;
-        }
-
         $payolutionLink = $this->_dataHelper->getPayolutionLink($this->methods[Payment\Installment::CODE]->getConfigData('payolution_mid'));
         if ($this->methods[Payment\Installment::CODE]->getProvider() == 'payolution' && $this->methods[Payment\Installment::CODE]->getConfigData('payolution_terms')) {
             $config['payment'][Payment\Installment::CODE]['consenttxt'] = sprintf($txt, $payolutionLink);

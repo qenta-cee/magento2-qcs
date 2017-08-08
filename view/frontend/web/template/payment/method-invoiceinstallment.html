@@ -72,8 +72,8 @@
                         <input class="input-text" type="text" name="customerDob" style="width: 120px"
                                data-validate="{required:true}"
                                data-bind="attr: {'id': getCode() + '-dob'}, value: customerDob, datepicker: { storage: customerDob, options: {} }"/>
-                        <div class="mage-error" generated="true" style="display: none;" data-bind="attr: {'id': getCode() + '-dob-error'}"></div>
                     </div>
+                    <div class="mage-error" generated="true" style="display: none;" data-bind="attr: {'id': getCode() + '-dob-error'}"></div>
                 </div>
                 <!-- /ko -->
 
@@ -89,7 +89,7 @@
                     </div>
 
                     <label class="label" style="width:80%"
-                           data-bind="attr: {'id': 'wirecard-checkoutseamless-consent-' + getCode()">
+                           data-bind="attr: {'for' : getCode() + '-consent-checkbox'}">
                         <span data-bind="html: getConsentText()"></span>
                     </label>
                     <div class="mage-error" generated="true" style="display: none;" data-bind="attr: {'id': getCode() + '-consent-checkbox-error'}"></div>
