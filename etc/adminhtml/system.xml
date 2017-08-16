@@ -372,7 +372,7 @@
             </group>
 
             <group id="wirecard_checkoutseamless_bmc" translate="label" type="text" sortOrder="5050" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard Checkout Seamless Bancontact/Mister Cash</label>
+                <label>Wirecard Checkout Seamless Bancontact</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -595,43 +595,6 @@
 
             <group id="wirecard_checkoutseamless_p24" translate="label" type="text" sortOrder="5110" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Wirecard Checkout Seamless Przelewy24</label>
-                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Enabled</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Title</label>
-                </field>
-                <field id="allowed_carrier" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Allowed Shipping Methods</label>
-                    <source_model>Magento\Shipping\Model\Config\Source\Allmethods</source_model>
-                </field>
-                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Payment from Applicable Countries</label>
-                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
-                </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Payment from Specific Countries</label>
-                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
-                    <can_be_empty>1</can_be_empty>
-                </field>
-                <field id="instructions" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instructions</label>
-                </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Sort Order</label>
-                    <frontend_class>validate-number</frontend_class>
-                </field>
-                <field id="min_order_total" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Order Total</label>
-                </field>
-                <field id="max_order_total" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Order Total</label>
-                </field>
-            </group>
-
-            <group id="wirecard_checkoutseamless_skrilldirect" translate="label" type="text" sortOrder="5120" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard Checkout Seamless Skrill Direct</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -938,12 +901,6 @@
                     <source_model>Magento\Config\Model\Config\Source\Locale\Currency</source_model>
                     <can_be_empty>1</can_be_empty>
                 </field>
-                <field id="min_age" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum age</label>
-                    <validate>validate-greater-than-zero</validate>
-                    <can_be_empty>1</can_be_empty>
-                    <comment>Only applicable for RatePay.</comment>
-                </field>
                 <field id="billing_shipping_address_identical" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Billing/Shipping Address must be identical</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -961,14 +918,6 @@
                 </field>
                 <field id="max_order_total" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Maximum Order Total</label>
-                </field>
-                <field id="min_basket_size" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
-                <field id="max_basket_size" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
                 </field>
             </group>
 
@@ -1030,14 +979,6 @@
                 <field id="max_order_total" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Maximum Order Total</label>
                 </field>
-                <field id="min_basket_size" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
-                <field id="max_basket_size" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
             </group>
 
             <group id="wirecard_checkoutseamless_installment" translate="label" type="text" sortOrder="5210" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -1089,12 +1030,6 @@
                     <source_model>Magento\Config\Model\Config\Source\Locale\Currency</source_model>
                     <can_be_empty>1</can_be_empty>
                 </field>
-                <field id="min_age" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum age</label>
-                    <validate>validate-greater-than-zero</validate>
-                    <can_be_empty>1</can_be_empty>
-                    <comment>Only applicable for RatePay.</comment>
-                </field>
                 <field id="billing_shipping_address_identical" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Billing/Shipping Address must be identical</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -1112,14 +1047,6 @@
                 </field>
                 <field id="max_order_total" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Maximum Order Total</label>
-                </field>
-                <field id="min_basket_size" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
-                </field>
-                <field id="max_basket_size" translate="label" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Basket Size</label>
-                    <validate>validate-greater-than-zero</validate>
                 </field>
             </group>
 
@@ -1321,43 +1248,6 @@
                         With this parameter you can define whether a transaction is a single (one-off) transaction or an initial transaction followed by many subsequent ones (e.g. for subscription models).
                         <a href="https://guides.wirecard.at/request_parameters#transactionidentifier" target="_blank">More information.</a>
                     ]]></comment>
-                </field>
-            </group>
-
-            <group id="wirecard_checkoutseamless_mpass" translate="label" type="text" sortOrder="5270" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard Checkout Seamless mpass</label>
-                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Enabled</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Title</label>
-                </field>
-                <field id="allowed_carrier" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Allowed Shipping Methods</label>
-                    <source_model>Magento\Shipping\Model\Config\Source\Allmethods</source_model>
-                </field>
-                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Payment from Applicable Countries</label>
-                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
-                </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Payment from Specific Countries</label>
-                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
-                    <can_be_empty>1</can_be_empty>
-                </field>
-                <field id="instructions" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instructions</label>
-                </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Sort Order</label>
-                    <frontend_class>validate-number</frontend_class>
-                </field>
-                <field id="min_order_total" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Minimum Order Total</label>
-                </field>
-                <field id="max_order_total" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Maximum Order Total</label>
                 </field>
             </group>
 

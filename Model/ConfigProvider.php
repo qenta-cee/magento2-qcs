@@ -53,9 +53,7 @@ class ConfigProvider implements ConfigProviderInterface
         Payment\Ideal::CODE,
         Payment\Giropay::CODE,
         Payment\Tatrapay::CODE,
-        Payment\Skrilldirect::CODE,
         Payment\Skrillwallet::CODE,
-        Payment\Mpass::CODE,
         Payment\Bmc::CODE,
         Payment\P24::CODE,
         Payment\Poli::CODE,
@@ -202,17 +200,6 @@ class ConfigProvider implements ConfigProviderInterface
         if ($this->methods[Payment\Invoice::CODE]->getProvider() == 'payolution' && $this->methods[Payment\Invoice::CODE]->getConfigData('payolution_terms')) {
             $config['payment'][Payment\Invoice::CODE]['consenttxt']    = sprintf($txt, $payolutionLink);
             $config['payment'][Payment\Invoiceb2b::CODE]['consenttxt'] = sprintf($txt, $payolutionLink);
-        }
-
-        $config['payment'][Payment\Invoice::CODE]['min_age']     = $this->methods[Payment\Invoice::CODE]->getConfigData('min_age');
-        $config['payment'][Payment\Installment::CODE]['min_age'] = $this->methods[Payment\Installment::CODE]->getConfigData('min_age');
-
-        if ($this->methods[Payment\Invoice::CODE]->getProvider() == 'payolution') {
-            $config['payment'][Payment\Invoice::CODE]['min_age'] = 18;
-        }
-
-        if ($this->methods[Payment\Installment::CODE]->getProvider() == 'payolution') {
-            $config['payment'][Payment\Installment::CODE]['min_age'] = 18;
         }
 
         $payolutionLink = $this->_dataHelper->getPayolutionLink($this->methods[Payment\Installment::CODE]->getConfigData('payolution_mid'));

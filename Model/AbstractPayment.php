@@ -149,6 +149,7 @@ abstract class AbstractPayment extends AbstractMethod
         $init->setConfirmUrl($urls['confirm']);
 
         $quote->reserveOrderId();
+        $checkoutSession = $cart->getCheckoutSession();
         $quote->save();
 
         $orderId = $quote->getReservedOrderId();
@@ -170,12 +171,17 @@ abstract class AbstractPayment extends AbstractMethod
             ->setFailureUrl($returnUrl)
             ->setServiceUrl($this->_dataHelper->getConfigData('options/service_url'))
             ->setConsumerData($this->_getConsumerData($quote))
-            ->setStorageid($this->_dataStorageHelper->getStorageId())
+            ->setStorageId($this->_dataStorageHelper->getStorageId())
             ->setOrderIdent($quote->getId());
 
         $init->mage_orderId       = $orderId;
         $init->mage_quoteId       = $quote->getId();
         $init->mage_orderCreation = $this->_dataHelper->getConfigData('options/order_creation');
+
+        if (strlen($checkoutSession->getData('consumerDeviceId'))) {
+            $init->consumerDeviceId = $checkoutSession->getData('consumerDeviceId');
+            $checkoutSession->unsetData('consumerDeviceId');
+        }
 
         $init->generateCustomerStatement($this->_dataHelper->getConfigData('options/shopname'), sprintf('%010d', $orderId));
 
@@ -441,25 +447,6 @@ abstract class AbstractPayment extends AbstractMethod
      */
     protected function _isAvailablePayolution($quote)
     {
-        $dob = $quote->getCustomer()->getDob();
-
-        //we only need to check the dob if it's set. Else we ask for dob on payment selection page.
-        if ($dob) {
-            $dobObject      = new \DateTime($dob);
-            $currentYear    = date('Y');
-            $currentMonth   = date('m');
-            $currentDay     = date('d');
-            $ageCheckDate   = ( $currentYear - 17 ) . '-' . $currentMonth . '-' . $currentDay;
-            $ageCheckObject = new \DateTime($ageCheckDate);
-            if ($ageCheckObject < $dobObject) {
-                return false;
-            }
-        }
-
-        if ($quote->hasVirtualItems()) {
-            return false;
-        }
-
         if ($this->getConfigData('billing_shipping_address_identical') && !$this->compareAddresses($quote)) {
             return false;
         }
@@ -472,18 +459,6 @@ abstract class AbstractPayment extends AbstractMethod
         if (strlen($this->getConfigData('shippingcountry'))) {
             $countries = explode(',', $this->getConfigData('shippingcountry'));
             if (!in_array($quote->getShippingAddress()->getCountry(), $countries)) {
-                return false;
-            }
-        }
-
-        if (strlen($this->getConfigData('max_basket_size'))) {
-            if ($quote->getItemsQty() > $this->getConfigData('max_basket_size')) {
-                return false;
-            }
-        }
-
-        if (strlen($this->getConfigData('min_basket_size'))) {
-            if ($quote->getItemsQty() < $this->getConfigData('min_basket_size')) {
                 return false;
             }
         }
@@ -498,31 +473,6 @@ abstract class AbstractPayment extends AbstractMethod
      */
     protected function _isAvailableRatePay($quote)
     {
-        $dob    = $quote->getCustomer()->getDob();
-        $minAge = (int) $this->getConfigData('min_age');
-
-        if ($minAge <= 0) {
-            $this->_logger->debug(__METHOD__ . ':warning min-age not set for ratepay');
-            return false;
-        }
-
-        //we only need to check the dob if it's set. Else we ask for dob on payment selection page.
-        if ($dob) {
-            $dobObject      = new \DateTime($dob);
-            $currentYear    = date('Y');
-            $currentMonth   = date('m');
-            $currentDay     = date('d');
-            $ageCheckDate   = ( $currentYear - $minAge ) . '-' . $currentMonth . '-' . $currentDay;
-            $ageCheckObject = new \DateTime($ageCheckDate);
-            if ($ageCheckObject < $dobObject) {
-                return false;
-            }
-        }
-
-        if ($quote->hasVirtualItems()) {
-            return false;
-        }
-
         if ($this->getConfigData('billing_shipping_address_identical') && !$this->compareAddresses($quote)) {
             return false;
         }
@@ -535,18 +485,6 @@ abstract class AbstractPayment extends AbstractMethod
         if (strlen($this->getConfigData('shippingcountry'))) {
             $countries = explode(',', $this->getConfigData('shippingcountry'));
             if (!in_array($quote->getShippingAddress()->getCountry(), $countries)) {
-                return false;
-            }
-        }
-
-        if (strlen($this->getConfigData('max_basket_size'))) {
-            if ($quote->getItemsQty() > $this->getConfigData('max_basket_size')) {
-                return false;
-            }
-        }
-
-        if (strlen($this->getConfigData('min_basket_size'))) {
-            if ($quote->getItemsQty() < $this->getConfigData('min_basket_size')) {
                 return false;
             }
         }

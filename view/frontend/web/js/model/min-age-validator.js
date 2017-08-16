@@ -40,17 +40,12 @@ define(
         'use strict';
 
         return {
-
-            minage: 0,
-
             /**
              * Validate checkout agreements
              *
              * @returns {Boolean}
              */
             validate: function (dob) {
-                if (this.minage == 0)
-                    return true;
 
                 var birthdate = new Date(dob);
 
@@ -60,7 +55,7 @@ define(
                     return false;
                 }
 
-                var limit = new Date((today.getFullYear() - this.minage), today.getMonth(), today.getDate());
+                var limit = new Date((today.getFullYear() - 18), today.getMonth(), today.getDate());
                 return birthdate < limit;
             }
         };
