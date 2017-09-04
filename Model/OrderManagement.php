@@ -173,6 +173,8 @@ class OrderManagement
             }
 
         } else if ($return->mage_orderCreation == 'after') {
+            $quote->collectTotals();
+
             switch ($return->getPaymentState()) {
 
                 case \WirecardCEE_QMore_ReturnFactory::STATE_SUCCESS:
