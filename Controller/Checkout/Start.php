@@ -114,6 +114,10 @@ class Start extends \Magento\Framework\App\Action\Action
             /** @var \Wirecard\CheckoutSeamless\Model\AbstractPayment $payment */
             $payment = $this->_cart->getQuote()->getPayment()->getMethodInstance();
 
+            if ($this->_dataHelper->getConfigData('options/order_creation') == 'before') {
+                $this->_cart->getQuote()->collectTotals();
+            }
+
             $init = $payment->initPaymentByCart($this->_cart, $urls,
                 new \Magento\Framework\DataObject($payment->getInfoInstance()->getAdditionalInformation()));
 
