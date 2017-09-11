@@ -37,7 +37,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="Magento\Framework\View\Element\Template" template="Wirecard_CheckoutSeamless::back.phtml" name="checkout.back" />
+            <block class="Magento\Framework\View\Element\Template" template="Wirecard_CheckoutSeamless::back.phtml" name="checkout.back" cacheable="false"/>
         </referenceContainer>
         <referenceBlock name="footer_links" remove="true"/>
         <referenceBlock name="catalog.topnav" remove="true"/>
