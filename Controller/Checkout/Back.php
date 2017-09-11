@@ -213,7 +213,7 @@ class Back extends \Magento\Framework\App\Action\Action
                             if ($returnedData['errors'] != 1) {
                                 $consumerMessage .= $i + 1;
                             }
-                            $consumerMessage .= $returnedData['error_' . ($i + 1) . '_consumerMessage'];
+                            $consumerMessage .= htmlspecialchars_decode($returnedData['error_' . ($i + 1) . '_consumerMessage']);
                             if ($returnedData['errors'] != 1) {
                                 $consumerMessage .= "<br>";
                             }
