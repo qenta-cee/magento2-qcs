@@ -82,6 +82,11 @@ class Back extends \Magento\Framework\App\Action\Action
      */
     protected $_quoteManagement;
 
+	/**
+	 * @var \Magento\Quote\Api\CartRepositoryInterface
+	 */
+	protected $_quoteRepository;
+
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */
@@ -102,6 +107,7 @@ class Back extends \Magento\Framework\App\Action\Action
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Quote\Api\CartManagementInterface $quoteManagement
+     * @param \Magento\Quote\Api\CartRepositoryInterface $quoteRepository
      * @param \Wirecard\CheckoutSeamless\Model\OrderManagement $orderManagement
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -115,6 +121,7 @@ class Back extends \Magento\Framework\App\Action\Action
         \Psr\Log\LoggerInterface $logger,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Quote\Api\CartManagementInterface $quoteManagement,
+	    \Magento\Quote\Api\CartRepositoryInterface $quoteRepository,
         \Wirecard\CheckoutSeamless\Model\OrderManagement $orderManagement
     ) {
         parent::__construct($context);
@@ -126,6 +133,7 @@ class Back extends \Magento\Framework\App\Action\Action
         $this->_logger            = $logger;
         $this->_checkoutSession   = $checkoutSession;
         $this->_quoteManagement   = $quoteManagement;
+	    $this->_quoteRepository   = $quoteRepository;
         $this->_orderManagement   = $orderManagement;
         $this->_order             = $order;
     }
@@ -227,6 +235,12 @@ class Back extends \Magento\Framework\App\Action\Action
                         if ($orderCreation == 'before') {
                             $quote = $this->_orderManagement->reOrder($quoteId);
                             $this->_checkoutSession->replaceQuote($quote)->unsLastRealOrderId();
+                        } else {
+	                        $quote = $this->_quoteRepository->get($quoteId);
+	                        // remove errorinformation from active quote
+	                        $quote->getPayment()->unsAdditionalInformation();
+	                        $quote->save();
+	                        $paymentInfo->unsetData(null);
                         }
 
                         break;
