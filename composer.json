@@ -12,7 +12,7 @@
     "magento/module-sales": "*",
     "magento/module-payment": "*",
     "magento/module-quote": "*",
-    "wirecard/checkout-client-library": "3.3.4"
+    "wirecard/checkout-client-library": "3.3.5"
   },
   "autoload": {
     "files": [
