@@ -101,17 +101,22 @@ class Confirm extends \Magento\Framework\App\Action\Action
             $return = \WirecardCEE_QMore_ReturnFactory::getInstance($this->_request->getPost()->toArray(),
                 $this->_dataHelper->getConfigData('basicdata/secret'));
 
-            if (!$return->validate()) {
-                throw new \Exception('Validation error: invalid response');
-            }
+	        $error = "";
+	        if (!$return->validate()) {
+		        $error = 'Validation error: invalid response';
+	        }
 
-            if (!strlen($return->mage_orderId)) {
-                throw new \Exception('Magento OrderId is missing');
-            }
+	        if (!strlen($return->mage_orderId)) {
+		        $error = 'Magento OrderId is missing';
+	        }
 
-            if (!strlen($return->mage_quoteId)) {
-                throw new \Exception('Magento QuoteId is missing');
-            }
+	        if (!strlen($return->mage_quoteId)) {
+		        $error = 'Magento QuoteId is missing';
+	        }
+
+	        if (strlen($error)) {
+		        die( \WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($error) );
+	        }
 
             $this->_orderManagement->processOrder($return);
 

@@ -349,56 +349,45 @@ class OrderManagement
                 $order->setStatus(\Magento\Sales\Model\Order::STATE_PROCESSING);
                 $message = $this->_dataHelper->__('The payment has been successfully completed.');
 
-                // invoice payment
-                if ($order->canInvoice()) {
+	            // invoice payment
+	            if ( $order->canInvoice() ) {
+		            $invoice = $order->prepareInvoice();
+		            $invoice->register();
 
-                    $invoice = $order->prepareInvoice();
+		            /* backend operation check for capturing if toolkit is available */
+		            if ( $this->_dataHelper->isBackendAvailable() ) {
+			            $hasBackedOps = false;
 
-                    $invoice->register();
+			            $orderDetails = $paymentInstance->getOrderDetails( $payment->getAdditionalInformation( 'orderNumber' ) );
+			            foreach ( $orderDetails->getOrder()->getPayments() as $wdPayment ) {
+				            /** @var \WirecardCEE_QMore_Response_Backend_Order_Payment $wdPayment */
 
-                    /* capture invoice if toolkit is not availble */
-                    if (!$this->_dataHelper->isBackendAvailable()) {
-                        $doCapture = true;
-                    } else {
-                        $hasBackedOps = false;
+				            $this->_logger->debug(
+					            __METHOD__ . ':payment-state:' . $wdPayment->getState() . ' allowed operations:' . implode(
+						            ',',
+						            $wdPayment->getOperationsAllowed()
+					            )
+				            );
+				            $operations = $wdPayment->getOperationsAllowed();
 
-                        $orderDetails = $paymentInstance->getOrderDetails($payment->getAdditionalInformation('orderNumber'));
-                        foreach ($orderDetails->getOrder()->getPayments() as $wdPayment) {
-                            /** @var \WirecardCEE_QMore_Response_Backend_Order_Payment $wdPayment */
+				            if ( ! in_array( 'DEPOSIT', $operations ) ) {
+					            $hasBackedOps = true;
+					            break;
+				            }
+			            }
 
-                            $this->_logger->debug(
-                                __METHOD__ . ':payment-state:' . $wdPayment->getState(
-                                ) . ' allowed operations:' . implode(
-                                    ',',
-                                    $wdPayment->getOperationsAllowed()
-                                )
-                            );
+			            /* if no deposit available in backendops, capture invoice */
+			            if ( $hasBackedOps ) {
+				            $doCapture = true;
+			            }
+		            }
 
-                            if (count($wdPayment->getOperationsAllowed())) {
-                                $hasBackedOps = true;
-                                break;
-                            }
-                        }
+		            if ( $doCapture && ! $fraudDetected ) {
+			            $invoice->capture();
+		            }
 
-                        if (count($orderDetails->getOrder()->getOperationsAllowed())) {
-                            $this->_logger->debug(__METHOD__ . ':order allowed operations: ' . implode(',',
-                                                                                                       $orderDetails->getOrder()->getOperationsAllowed()));
-                            $hasBackedOps = true;
-                        }
-
-                        /* no backend ops allowed anymore, assume final state of payment, capture invoice */
-                        if (!$hasBackedOps) {
-                            $doCapture = true;
-                        }
-
-                    }
-
-                    if ($doCapture && !$fraudDetected) {
-                        $invoice->capture();
-                    }
-
-                    $order->addRelatedObject($invoice);
-                }
+		            $order->addRelatedObject( $invoice );
+	            }
 
                 $this->_orderSender->send($order);
             }
