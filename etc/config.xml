@@ -143,7 +143,7 @@
 
             <wirecard_checkoutseamless_sofortbanking>
                 <active>1</active>
-                <title>Wirecard Checkout Seamless SOFORT Banking</title>
+                <title>Wirecard Checkout Seamless Online bank transfer.</title>
                 <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
                 <model>Wirecard\CheckoutSeamless\Model\Payment\Sofortbanking</model>
                 <sort_order>210</sort_order>
