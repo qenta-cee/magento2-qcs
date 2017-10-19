@@ -33,5 +33,9 @@
 -->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Wirecard_CheckoutSeamless" setup_version="2.0.0"></module>
+    <module name="Wirecard_CheckoutSeamless" setup_version="2.0.0">
+        <depends>
+            <module name="Magento_CheckoutAgreements" />
+        </depends>
+    </module>
 </config>
