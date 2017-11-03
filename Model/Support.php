@@ -61,7 +61,7 @@ class Support
     protected $_paymentConfig;
 
     /**
-     * @var \Magento\Framework\App\Config\ScopePool
+     * @var \Wirecard\CheckoutSeamless\Model\App\Config\ScopePool
      */
     protected $_scopePool;
 
@@ -184,7 +184,7 @@ class Support
 
     /**
      * @param \Wirecard\CheckoutSeamless\Helper\Data $dataHelper
-     * @param \Magento\Framework\App\Config\ScopePool $scopePool
+     * @param \Wirecard\CheckoutSeamless\Model\App\Config\ScopePool $scopePool
      * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Framework\Module\ModuleList\Loader $moduleLoader
      * @param \Magento\Payment\Model\Config $paymentConfig
@@ -192,7 +192,7 @@ class Support
      */
     public function __construct(
         \Wirecard\CheckoutSeamless\Helper\Data $dataHelper,
-        \Magento\Framework\App\Config\ScopePool $scopePool,
+        \Wirecard\CheckoutSeamless\Model\App\Config\ScopePool $scopePool,
         \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
         \Magento\Framework\Module\ModuleList\Loader $moduleLoader,
         \Magento\Payment\Model\Config $paymentConfig
