@@ -109,10 +109,6 @@ define(
                 component: 'Wirecard_CheckoutSeamless/js/view/payment/method-renderer/standard'
             },
             {
-                type: 'wirecard_checkoutseamless_quick',
-                component: 'Wirecard_CheckoutSeamless/js/view/payment/method-renderer/standard'
-            },
-            {
                 type: 'wirecard_checkoutseamless_paypal',
                 component: 'Wirecard_CheckoutSeamless/js/view/payment/method-renderer/standard'
             },
