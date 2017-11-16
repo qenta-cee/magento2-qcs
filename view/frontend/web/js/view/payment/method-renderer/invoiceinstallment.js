@@ -36,9 +36,10 @@ define(
         'Wirecard_CheckoutSeamless/js/model/min-age-validator',
         'mage/url',
         'jquery',
-        'mage/translate'
+        'mage/translate',
+        'Magento_Checkout/js/model/payment/additional-validators'
     ],
-    function (Component, setPaymentMethodAction, minAgeValidator, url, $, $t) {
+    function (Component, setPaymentMethodAction, minAgeValidator, url, $, $t, additionalValidators) {
         return Component.extend({
 
             customerData: {},
@@ -90,8 +91,16 @@ define(
 
             getConsentText: function () {
                 return window.checkoutConfig.payment[this.getCode()].consenttxt;
-            }
+            },
 
+            placeWirecardOrder: function() {
+                if (this.validate() && additionalValidators.validate()) {
+                    this.selectPaymentMethod();
+
+                    setPaymentMethodAction(this.messageContainer, this.getDisplayMode());
+                }
+                return false;
+            }
         });
     }
 );

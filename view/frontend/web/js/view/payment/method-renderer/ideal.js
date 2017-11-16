@@ -34,9 +34,10 @@ define(
         'Wirecard_CheckoutSeamless/js/view/payment/method-renderer/standard',
         'Wirecard_CheckoutSeamless/js/action/set-payment-method',
         'mage/url',
-        'jquery'
+        'jquery',
+        'Magento_Checkout/js/model/payment/additional-validators'
     ],
-    function (Component, setPaymentMethodAction, url, $) {
+    function (Component, setPaymentMethodAction, url, $, additionalValidators) {
         return Component.extend({
             defaults: {
                 template: 'Wirecard_CheckoutSeamless/payment/method-ideal'
@@ -61,6 +62,15 @@ define(
 
             getFinancialInstitutions: function () {
                 return window.checkoutConfig.payment[this.getCode()].financialinstitutions;
+            },
+
+            placeWirecardOrder: function() {
+                if (this.validate() && additionalValidators.validate()) {
+                    this.selectPaymentMethod();
+
+                    setPaymentMethodAction(this.messageContainer, this.getDisplayMode());
+                }
+                return false;
             }
         });
     }
