@@ -61,9 +61,16 @@ define(
                 var frm = $('#' + this.getCode() + '-form');
                 return frm.validation() && frm.validation('isValid');
             },
-
             getFinancialInstitutions: function () {
                 return window.checkoutConfig.payment[this.getCode()].financialinstitutions;
+            },
+            placeWirecardOrder: function() {
+                if (this.validate() && additionalValidators.validate()) {
+                    this.selectPaymentMethod();
+
+                    setPaymentMethodAction(this.messageContainer, this.getDisplayMode());
+                }
+                return false;
             }
         });
     }

@@ -173,7 +173,7 @@ define(
                 return $.extend(true, parent, {'additional_data': additionalData});
             },
             placeWirecardOrder: function () {
-                if (this.validate()) {
+                if (this.validate() && additionalValidators.validate()) {
                     var paymentMethod = this.getPaymentMethod(),
                         ccData = {},
                         failure = function (errors, messageContainer) {
