@@ -233,6 +233,9 @@ class OrderManagement
         $history     = $order->getAllStatusHistory();
         $paymentInst = $order->getPayment()->getMethodInstance();
         if ($paymentInst) {
+            if (strpos($paymentInst->getCode(), 'wirecard') === false) {
+                return true;
+            }
             foreach ($history AS $entry) {
                 if ($entry->getStatus() == \Magento\Sales\Model\Order::STATE_PROCESSING) {
                     return true;
