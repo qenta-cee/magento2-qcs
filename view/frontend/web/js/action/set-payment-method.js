@@ -52,6 +52,7 @@ define(
                 paymentData = quote.paymentMethod(),
                 methodeCode = quote.paymentMethod().method,
                 checkoutStartUrl = url.build('/wirecardcheckoutseamless/checkout/start', {});
+                agreementsAssigner(paymentData);
 
             /**
              * Checkout for guest and registered customer.
@@ -68,7 +69,6 @@ define(
                 };
             } else {
                 serviceUrl = urlBuilder.createUrl('/carts/mine/set-payment-information', {});
-                agreementsAssigner(paymentData);
                 payload = {
                     cartId: quote.getQuoteId(),
                     paymentMethod: paymentData,
