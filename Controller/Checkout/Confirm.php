@@ -35,7 +35,7 @@ namespace Wirecard\CheckoutSeamless\Controller\Checkout;
 use Magento\Checkout\Model\Cart as CheckoutCart;
 use Magento\Framework\Exception\InputException;
 
-class Confirm extends \Magento\Framework\App\Action\Action
+class Confirm extends \Magento\Framework\App\Action\Action implements \Magento\Framework\App\CsrfAwareActionInterface
 {
 
     /**
@@ -127,5 +127,20 @@ class Confirm extends \Magento\Framework\App\Action\Action
 
             die( \WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($e->getMessage()) );
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createCsrfValidationException(\Magento\Framework\App\RequestInterface $request): ?\Magento\Framework\App\Request\InvalidRequestException {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateForCsrf(\Magento\Framework\App\RequestInterface $request): ?bool
+    {
+        return true;
     }
 }
