@@ -434,8 +434,8 @@ abstract class AbstractPayment extends AbstractMethod
         $infoInstance = $this->getInfoInstance();
 
         /* unset data wich is used for dedicated payment methods only */
-        $infoInstance->unsAdditionalInformation('financialInstitution');
-        $infoInstance->unsAdditionalInformation('customerDob');
+        $infoInstance->setAdditionalInformation('financialInstitution', '');
+        $infoInstance->setAdditionalInformation('customerDob', '');
 
         return $this;
     }

@@ -34,9 +34,12 @@ namespace Wirecard\CheckoutSeamless\Controller\Checkout;
 
 use Magento\Checkout\Model\Cart as CheckoutCart;
 use Magento\Framework\Exception\InputException;
+use Magento\Framework\App\CsrfAwareActionInterface;
+use Wirecard\ElasticEngine\Controller\Frontend\NoCsrfTrait;
 
-class Confirm extends \Magento\Framework\App\Action\Action
+class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareActionInterface
 {
+    use NoCsrfTrait;
 
     /**
      * @var \Magento\Framework\HTTP\PhpEnvironment\Request
@@ -101,31 +104,31 @@ class Confirm extends \Magento\Framework\App\Action\Action
             $return = \WirecardCEE_QMore_ReturnFactory::getInstance($this->_request->getPost()->toArray(),
                 $this->_dataHelper->getConfigData('basicdata/secret'));
 
-	        $error = "";
-	        if (!$return->validate()) {
-		        $error = 'Validation error: invalid response';
-	        }
+            $error = "";
+            if (!$return->validate()) {
+                $error = 'Validation error: invalid response';
+            }
 
-	        if (!strlen($return->mage_orderId)) {
-		        $error = 'Magento OrderId is missing';
-	        }
+            if (!strlen($return->mage_orderId)) {
+                $error = 'Magento OrderId is missing';
+            }
 
-	        if (!strlen($return->mage_quoteId)) {
-		        $error = 'Magento QuoteId is missing';
-	        }
+            if (!strlen($return->mage_quoteId)) {
+                $error = 'Magento QuoteId is missing';
+            }
 
-	        if (strlen($error)) {
-		        die( \WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($error) );
-	        }
+            if (strlen($error)) {
+                die(\WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($error));
+            }
 
             $this->_orderManagement->processOrder($return);
 
-            die( \WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString() );
+            die(\WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString());
         } catch (\Exception $e) {
             $this->_logger->debug(__METHOD__ . ':' . $e->getMessage());
             $this->_logger->debug(__METHOD__ . ':' . $e->getTraceAsString());
 
-            die( \WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($e->getMessage()) );
+            die(\WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($e->getMessage()));
         }
     }
 }

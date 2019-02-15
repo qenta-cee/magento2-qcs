@@ -104,7 +104,6 @@ class Start extends \Magento\Framework\App\Action\Action
                 ['_secure' => true, '_nosid' => true])
         ];
 
-
         $payment = null;
         try {
             if ($this->getCheckoutMethod() == \Magento\Checkout\Model\Type\Onepage::METHOD_GUEST) {
