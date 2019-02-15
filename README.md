@@ -4,9 +4,9 @@
 [![PHP v5.6](https://img.shields.io/badge/php-v5.6-yellow.svg)](http://www.php.net)
 [![PHP v7.0](https://img.shields.io/badge/php-v7.0-yellow.svg)](http://www.php.net)
 [![Magento v2.1.15](https://img.shields.io/badge/magento-v2.1.15-green.svg)](https://magento.com/)
-[![Magento v2.2.6](https://img.shields.io/badge/magento-v2.2.6-green.svg)](https://magento.com/)
+[![Magento v2.3.0](https://img.shields.io/badge/magento-v2.3.0-green.svg)](https://magento.com/)
 
-Wirecard Checkout Seamless extension for Magento 2.1 and Magento 2.2 
+Wirecard Checkout Seamless extension for Magento 2.1, Magento 2.2 and Magento 2.3
 
 Our [Online Guides](https://guides.wirecard.at/) provide further information on payment methods and additional features. Please observe our [terms of use](https://guides.wirecard.at/shop_plugins:info#terms_of_use) regarding plugins.
 
