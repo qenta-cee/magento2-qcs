@@ -42,7 +42,7 @@ threatening, offensive, or harmful.
 ## Scope
 
 This Code Of Conduct applies to all open source projects published by
-Wirecard AG, including the issue tracker of those projects.
+Qenta AG, including the issue tracker of those projects.
 
 ## Enforcement
 

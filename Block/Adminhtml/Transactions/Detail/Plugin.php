@@ -2,8 +2,8 @@
 /**
 * Shop System Plugins - Terms of Use
 *
-* The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
-* (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+* The plugins offered are provided free of charge by Qenta Central Eastern Europe GmbH
+* (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
 * products and services.
 *
 * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
 * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
 * the same terms.
 *
-* However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+* However, Qenta CEE does not provide any guarantee or accept any liability for any errors
 * occurring when used in an enhanced, customized shop system configuration.
 *
 * Operation in an enhanced, customized configuration is at your own risk and requires a
 * comprehensive test phase by the user of the plugin.
 *
-* Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
-* functionality neither does Wirecard CEE assume liability for any disadvantages related to
-* the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+* Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+* functionality neither does Qenta CEE assume liability for any disadvantages related to
+* the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
 * for customized shop systems or installed plugins of other vendors of plugins within the same
 * shop system.
 *
@@ -30,7 +30,7 @@
 * Please do not use the plugin if you do not agree to these terms of use!
 */
 
-namespace Wirecard\CheckoutSeamless\Block\Adminhtml\Transactions\Detail;
+namespace Qenta\CheckoutSeamless\Block\Adminhtml\Transactions\Detail;
 
 use \Magento\Sales\Model\Order\Payment\Transaction;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface;
@@ -103,11 +103,11 @@ class Plugin
 
         $methodInstance = $payment->getMethodInstance();
 
-        if ($methodInstance instanceof \Wirecard\CheckoutSeamless\Model\AbstractPayment) {
+        if ($methodInstance instanceof \Qenta\CheckoutSeamless\Model\AbstractPayment) {
             $addInfo = $this->_txn->getAdditionalInformation('raw_details_info');
 
             if (isset($addInfo['orderNumber']) && isset($addInfo['creditNumber'])) {
-                $fetchUrl = $this->_urlBuilder->getUrl('wirecardcheckoutseamless/transactions/refundreversal', ['_current' => true]);
+                $fetchUrl = $this->_urlBuilder->getUrl('qentacheckoutseamless/transactions/refundreversal', ['_current' => true]);
                 $subject->addButton('refundreversal', ['label' => __('Refund Reversal'), 'onclick' => "setLocation('{$fetchUrl}')", 'class' => 'button']);
             }
         }

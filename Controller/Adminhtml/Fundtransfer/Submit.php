@@ -2,8 +2,8 @@
 /**
  * Shop System Plugins - Terms of Use
  *
- * The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
- * (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+ * The plugins offered are provided free of charge by Qenta Central Eastern Europe GmbH
+ * (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
  * products and services.
  *
  * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
  * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
  * the same terms.
  *
- * However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+ * However, Qenta CEE does not provide any guarantee or accept any liability for any errors
  * occurring when used in an enhanced, customized shop system configuration.
  *
  * Operation in an enhanced, customized configuration is at your own risk and requires a
  * comprehensive test phase by the user of the plugin.
  *
- * Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
- * functionality neither does Wirecard CEE assume liability for any disadvantages related to
- * the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+ * Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+ * functionality neither does Qenta CEE assume liability for any disadvantages related to
+ * the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
  * for customized shop systems or installed plugins of other vendors of plugins within the same
  * shop system.
  *
@@ -30,7 +30,7 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Wirecard\CheckoutSeamless\Controller\Adminhtml\Fundtransfer;
+namespace Qenta\CheckoutSeamless\Controller\Adminhtml\Fundtransfer;
 
 use Magento\Backend\App\Action\Context;
 
@@ -38,12 +38,12 @@ use Magento\Backend\App\Action\Context;
 class Submit extends \Magento\Backend\App\Action
 {
     /**
-     * @var \Wirecard\CheckoutSeamless\Helper\Data
+     * @var \Qenta\CheckoutSeamless\Helper\Data
      */
     protected $_dataHelper;
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Model\FundTransfer
+     * @var \Qenta\CheckoutSeamless\Model\FundTransfer
      */
     protected $_fundTransferModel;
 
@@ -57,8 +57,8 @@ class Submit extends \Magento\Backend\App\Action
 
     public function __construct(
         Context $context,
-        \Wirecard\CheckoutSeamless\Model\FundTransfer $fundTransferModel,
-        \Wirecard\CheckoutSeamless\Helper\Data $dataHelper,
+        \Qenta\CheckoutSeamless\Model\FundTransfer $fundTransferModel,
+        \Qenta\CheckoutSeamless\Helper\Data $dataHelper,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Psr\Log\LoggerInterface $logger
     ) {
@@ -71,7 +71,7 @@ class Submit extends \Magento\Backend\App\Action
 
     public function execute()
     {
-        $redirectUrl = $this->getUrl('wirecardcheckoutseamless/fundtransfer/transfer');
+        $redirectUrl = $this->getUrl('qentacheckoutseamless/fundtransfer/transfer');
 
         if (!( $data = $this->getRequest()->getPostValue() )) {
             $this->_redirect($redirectUrl);
@@ -83,7 +83,7 @@ class Submit extends \Magento\Backend\App\Action
         $postObject->setData($data);
 
 
-        $this->_session->setWirecardCheckoutSeamlessFundTrandsferFormData($postObject);
+        $this->_session->setQentaCheckoutSeamlessFundTrandsferFormData($postObject);
 
         try {
             $return = $this->_fundTransferModel->sendrequest($postObject);
@@ -93,7 +93,7 @@ class Submit extends \Magento\Backend\App\Action
                 }
             } else {
                 $this->_logger->debug(__METHOD__ . ':' . print_r($postObject->getData(), true));
-                $this->_session->unsWirecardCheckoutSeamlessFundTrandsferFormData();
+                $this->_session->unsQentaCheckoutSeamlessFundTrandsferFormData();
                 $this->messageManager->addNoticeMessage($this->_dataHelper->__('Fund transfer submitted successfully!'));
                 $this->messageManager->addNoticeMessage($this->_dataHelper->__('Credit number' . ':' . $return->getCreditNumber()));
             }

@@ -3,8 +3,8 @@
 /**
 * Shop System Plugins - Terms of Use
 *
-* The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
-* (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+* The plugins offered are provided free of charge by Qenta Central Eastern Europe GmbH
+* (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
 * products and services.
 *
 * They have been tested and approved for full functionality in the standard configuration
@@ -12,15 +12,15 @@
 * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
 * the same terms.
 *
-* However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+* However, Qenta CEE does not provide any guarantee or accept any liability for any errors
 * occurring when used in an enhanced, customized shop system configuration.
 *
 * Operation in an enhanced, customized configuration is at your own risk and requires a
 * comprehensive test phase by the user of the plugin.
 *
-* Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
-* functionality neither does Wirecard CEE assume liability for any disadvantages related to
-* the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+* Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+* functionality neither does Qenta CEE assume liability for any disadvantages related to
+* the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
 * for customized shop systems or installed plugins of other vendors of plugins within the same
 * shop system.
 *
@@ -34,7 +34,7 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <wirecard_checkoutseamless>
+        <qenta_checkoutseamless>
             <basicdata>
                 <configuration>production</configuration>
                 <customer_id>D200001</customer_id>
@@ -56,160 +56,160 @@
                 <displayissuenumber>0</displayissuenumber>
                 <iframe_css_url>pci3iframe.css</iframe_css_url>
             </ccard>
-        </wirecard_checkoutseamless>
+        </qenta_checkoutseamless>
 
         <payment>
-            <wirecard_checkoutseamless_ccard>
+            <qenta_checkoutseamless_ccard>
                 <active>1</active>
-                <title>Wirecard Checkout Seamless Credit Card</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Ccard</model>
+                <title>Qenta Checkout Seamless Credit Card</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Ccard</model>
                 <sort_order>110</sort_order>
-            </wirecard_checkoutseamless_ccard>
+            </qenta_checkoutseamless_ccard>
 
-            <wirecard_checkoutseamless_ccardmoto>
+            <qenta_checkoutseamless_ccardmoto>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Credit Card - Mail Order / Telephone Order</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
+                <title>Qenta Checkout Seamless Credit Card - Mail Order / Telephone Order</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
                 <displaymode>iframe</displaymode>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Ccardmoto</model>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Ccardmoto</model>
                 <sort_order>120</sort_order>
-            </wirecard_checkoutseamless_ccardmoto>
+            </qenta_checkoutseamless_ccardmoto>
 
-            <wirecard_checkoutseamless_maestro>
+            <qenta_checkoutseamless_maestro>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Maestro SecureCode</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Maestro</model>
+                <title>Qenta Checkout Seamless Maestro SecureCode</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Maestro</model>
                 <sort_order>125</sort_order>
-            </wirecard_checkoutseamless_maestro>
+            </qenta_checkoutseamless_maestro>
 
-            <wirecard_checkoutseamless_bmc>
+            <qenta_checkoutseamless_bmc>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Bancontact</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Bmc</model>
+                <title>Qenta Checkout Seamless Bancontact</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Bmc</model>
                 <sort_order>130</sort_order>
-            </wirecard_checkoutseamless_bmc>
+            </qenta_checkoutseamless_bmc>
 
-            <wirecard_checkoutseamless_ekonto>
+            <qenta_checkoutseamless_ekonto>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless eKonto</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
+                <title>Qenta Checkout Seamless eKonto</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
                 <displaymode>iframe</displaymode>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Ekonto</model>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Ekonto</model>
                 <sort_order>140</sort_order>
-            </wirecard_checkoutseamless_ekonto>
+            </qenta_checkoutseamless_ekonto>
 
-            <wirecard_checkoutseamless_eps>
+            <qenta_checkoutseamless_eps>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless eps Online-Überweisung</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Eps</model>
+                <title>Qenta Checkout Seamless eps Online-Überweisung</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Eps</model>
                 <sort_order>150</sort_order>
-            </wirecard_checkoutseamless_eps>
+            </qenta_checkoutseamless_eps>
 
-            <wirecard_checkoutseamless_giropay>
+            <qenta_checkoutseamless_giropay>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless giropay</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Giropay</model>
+                <title>Qenta Checkout Seamless giropay</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Giropay</model>
                 <sort_order>160</sort_order>
-            </wirecard_checkoutseamless_giropay>
+            </qenta_checkoutseamless_giropay>
 
-            <wirecard_checkoutseamless_ideal>
+            <qenta_checkoutseamless_ideal>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless iDEAL</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Ideal</model>
+                <title>Qenta Checkout Seamless iDEAL</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Ideal</model>
                 <sort_order>170</sort_order>
-            </wirecard_checkoutseamless_ideal>
+            </qenta_checkoutseamless_ideal>
 
-            <wirecard_checkoutseamless_poli>
+            <qenta_checkoutseamless_poli>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless POLi</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Poli</model>
+                <title>Qenta Checkout Seamless POLi</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Poli</model>
                 <sort_order>180</sort_order>
-            </wirecard_checkoutseamless_poli>
+            </qenta_checkoutseamless_poli>
 
-            <wirecard_checkoutseamless_p24>
+            <qenta_checkoutseamless_p24>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Przelewy24</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\P24</model>
+                <title>Qenta Checkout Seamless Przelewy24</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\P24</model>
                 <sort_order>190</sort_order>
-            </wirecard_checkoutseamless_p24>
+            </qenta_checkoutseamless_p24>
 
-            <wirecard_checkoutseamless_sofortbanking>
+            <qenta_checkoutseamless_sofortbanking>
                 <active>1</active>
-                <title>Wirecard Checkout Seamless Online bank transfer.</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Sofortbanking</model>
+                <title>Qenta Checkout Seamless Online bank transfer.</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Sofortbanking</model>
                 <sort_order>210</sort_order>
-            </wirecard_checkoutseamless_sofortbanking>
+            </qenta_checkoutseamless_sofortbanking>
 
-            <wirecard_checkoutseamless_tatrapay>
+            <qenta_checkoutseamless_tatrapay>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless TatraPay</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Tatrapay</model>
+                <title>Qenta Checkout Seamless TatraPay</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Tatrapay</model>
                 <sort_order>220</sort_order>
-            </wirecard_checkoutseamless_tatrapay>
+            </qenta_checkoutseamless_tatrapay>
 
-            <wirecard_checkoutseamless_trustly>
+            <qenta_checkoutseamless_trustly>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Trustly</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Trustly</model>
+                <title>Qenta Checkout Seamless Trustly</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Trustly</model>
                 <sort_order>230</sort_order>
-            </wirecard_checkoutseamless_trustly>
+            </qenta_checkoutseamless_trustly>
 
-            <wirecard_checkoutseamless_trustpay>
+            <qenta_checkoutseamless_trustpay>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Trustpay</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Trustpay</model>
+                <title>Qenta Checkout Seamless Trustpay</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Trustpay</model>
                 <sort_order>240</sort_order>
-            </wirecard_checkoutseamless_trustpay>
+            </qenta_checkoutseamless_trustpay>
 
-            <wirecard_checkoutseamless_epaybg>
+            <qenta_checkoutseamless_epaybg>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless ePay.bg</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Epaybg</model>
+                <title>Qenta Checkout Seamless ePay.bg</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Epaybg</model>
                 <sort_order>250</sort_order>
-            </wirecard_checkoutseamless_epaybg>
+            </qenta_checkoutseamless_epaybg>
 
-            <wirecard_checkoutseamless_moneta>
+            <qenta_checkoutseamless_moneta>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless moneta.ru</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Moneta</model>
+                <title>Qenta Checkout Seamless moneta.ru</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Moneta</model>
                 <sort_order>260</sort_order>
-            </wirecard_checkoutseamless_moneta>
+            </qenta_checkoutseamless_moneta>
 
-            <wirecard_checkoutseamless_invoice>
+            <qenta_checkoutseamless_invoice>
                 <active>1</active>
-                <title>Wirecard Checkout Seamless Invoice</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
+                <title>Qenta Checkout Seamless Invoice</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
                 <payolution_terms>1</payolution_terms>
                 <currency>EUR</currency>
-                <provider>wirecard</provider>
+                <provider>qenta</provider>
                 <allowspecific>1</allowspecific>
                 <specificcountry>AT,DE,CH</specificcountry>
                 <shippingcountry>AT,DE,CH</shippingcountry>
                 <billing_shipping_address_identical>1</billing_shipping_address_identical>
                 <min_order_total>10</min_order_total>
                 <max_order_total>3500</max_order_total>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Invoice</model>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Invoice</model>
                 <sort_order>270</sort_order>
-            </wirecard_checkoutseamless_invoice>
+            </qenta_checkoutseamless_invoice>
 
-            <wirecard_checkoutseamless_invoiceb2b>
+            <qenta_checkoutseamless_invoiceb2b>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Invoice B2B</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
+                <title>Qenta Checkout Seamless Invoice B2B</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
                 <payolution_terms>1</payolution_terms>
                 <currency>EUR</currency>
                 <allowspecific>1</allowspecific>
@@ -218,14 +218,14 @@
                 <billing_shipping_address_identical>1</billing_shipping_address_identical>
                 <min_order_total>25</min_order_total>
                 <max_order_total>3500</max_order_total>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Invoiceb2b</model>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Invoiceb2b</model>
                 <sort_order>280</sort_order>
-            </wirecard_checkoutseamless_invoiceb2b>
+            </qenta_checkoutseamless_invoiceb2b>
 
-            <wirecard_checkoutseamless_installment>
+            <qenta_checkoutseamless_installment>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Installment</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
+                <title>Qenta Checkout Seamless Installment</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
                 <payolution_terms>1</payolution_terms>
                 <currency>EUR</currency>
                 <provider>payolution</provider>
@@ -235,59 +235,59 @@
                 <billing_shipping_address_identical>1</billing_shipping_address_identical>
                 <min_order_total>150</min_order_total>
                 <max_order_total>3500</max_order_total>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Installment</model>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Installment</model>
                 <sort_order>290</sort_order>
-            </wirecard_checkoutseamless_installment>
+            </qenta_checkoutseamless_installment>
 
-            <wirecard_checkoutseamless_paypal>
+            <qenta_checkoutseamless_paypal>
                 <active>1</active>
-                <title>Wirecard Checkout Seamless PayPal</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Paypal</model>
+                <title>Qenta Checkout Seamless PayPal</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Paypal</model>
                 <sort_order>300</sort_order>
                 <txident>SINGLE</txident>
-            </wirecard_checkoutseamless_paypal>
+            </qenta_checkoutseamless_paypal>
 
-            <wirecard_checkoutseamless_paysafecard>
+            <qenta_checkoutseamless_paysafecard>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless paysafecard</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Paysafecard</model>
+                <title>Qenta Checkout Seamless paysafecard</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Paysafecard</model>
                 <sort_order>310</sort_order>
-            </wirecard_checkoutseamless_paysafecard>
+            </qenta_checkoutseamless_paysafecard>
 
-            <wirecard_checkoutseamless_skrillwallet>
+            <qenta_checkoutseamless_skrillwallet>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless Skrill Digital Wallet</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Skrillwallet</model>
+                <title>Qenta Checkout Seamless Skrill Digital Wallet</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Skrillwallet</model>
                 <sort_order>330</sort_order>
-            </wirecard_checkoutseamless_skrillwallet>
+            </qenta_checkoutseamless_skrillwallet>
 
-            <wirecard_checkoutseamless_sepa>
+            <qenta_checkoutseamless_sepa>
                 <active>1</active>
-                <title>Wirecard Checkout Seamless SEPA Direct Debit</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Sepa</model>
+                <title>Qenta Checkout Seamless SEPA Direct Debit</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Sepa</model>
                 <sort_order>340</sort_order>
                 <txident>SINGLE</txident>
-            </wirecard_checkoutseamless_sepa>
+            </qenta_checkoutseamless_sepa>
 
-            <wirecard_checkoutseamless_paybox>
+            <qenta_checkoutseamless_paybox>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless paybox</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Paybox</model>
+                <title>Qenta Checkout Seamless paybox</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Paybox</model>
                 <sort_order>360</sort_order>
-            </wirecard_checkoutseamless_paybox>
+            </qenta_checkoutseamless_paybox>
 
-            <wirecard_checkoutseamless_voucher>
+            <qenta_checkoutseamless_voucher>
                 <active>0</active>
-                <title>Wirecard Checkout Seamless My Voucher</title>
-                <instructions>You will be redirected to Wirecard Checkout Seamless when you place an order.</instructions>
-                <model>Wirecard\CheckoutSeamless\Model\Payment\Voucher</model>
+                <title>Qenta Checkout Seamless My Voucher</title>
+                <instructions>You will be redirected to Qenta Checkout Seamless when you place an order.</instructions>
+                <model>Qenta\CheckoutSeamless\Model\Payment\Voucher</model>
                 <sort_order>370</sort_order>
-            </wirecard_checkoutseamless_voucher>
+            </qenta_checkoutseamless_voucher>
 
         </payment>
 

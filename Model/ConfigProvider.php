@@ -2,8 +2,8 @@
 /**
  * Shop System Plugins - Terms of Use
  *
- * The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
- * (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+ * The plugins offered are provided free of charge by Qenta Central Eastern Europe GmbH
+ * (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
  * products and services.
  *
  * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
  * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
  * the same terms.
  *
- * However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+ * However, Qenta CEE does not provide any guarantee or accept any liability for any errors
  * occurring when used in an enhanced, customized shop system configuration.
  *
  * Operation in an enhanced, customized configuration is at your own risk and requires a
  * comprehensive test phase by the user of the plugin.
  *
- * Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
- * functionality neither does Wirecard CEE assume liability for any disadvantages related to
- * the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+ * Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+ * functionality neither does Qenta CEE assume liability for any disadvantages related to
+ * the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
  * for customized shop systems or installed plugins of other vendors of plugins within the same
  * shop system.
  *
@@ -30,7 +30,7 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Wirecard\CheckoutSeamless\Model;
+namespace Qenta\CheckoutSeamless\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 
@@ -38,7 +38,7 @@ class ConfigProvider implements ConfigProviderInterface
 {
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Helper\Data
+     * @var \Qenta\CheckoutSeamless\Helper\Data
      */
     protected $_dataHelper;
 
@@ -74,7 +74,7 @@ class ConfigProvider implements ConfigProviderInterface
     ];
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Model\AbstractPayment[]
+     * @var \Qenta\CheckoutSeamless\Model\AbstractPayment[]
      */
     protected $methods = [];
 
@@ -96,14 +96,14 @@ class ConfigProvider implements ConfigProviderInterface
     protected $assetRepo;
 
     /**
-     * @param \Wirecard\CheckoutSeamless\Helper\Data $helper
+     * @param \Qenta\CheckoutSeamless\Helper\Data $helper
      * @param \Magento\Payment\Helper\Data $paymentHelper
      * @param \Magento\Framework\Escaper $escaper
      * @param \Magento\Framework\View\Asset\Repository $assetRepo
      *
      */
     public function __construct(
-        \Wirecard\CheckoutSeamless\Helper\Data $helper,
+        \Qenta\CheckoutSeamless\Helper\Data $helper,
         \Magento\Payment\Helper\Data $paymentHelper,
         \Magento\Framework\Escaper $escaper,
         \Magento\Framework\View\Asset\Repository $assetRepo
@@ -139,7 +139,7 @@ class ConfigProvider implements ConfigProviderInterface
         /*
          * EPS financial institutions
          */
-        $fis = \WirecardCEE_QMore_PaymentType::getFinancialInstitutions(\WirecardCEE_QMore_PaymentType::EPS);
+        $fis = \QentaCEE\QMore\PaymentType::getFinancialInstitutions(\QentaCEE\QMore\PaymentType::EPS);
 
         $epsFinancialInstitutions = [];
         foreach ($fis as $k => $v) {
@@ -158,7 +158,7 @@ class ConfigProvider implements ConfigProviderInterface
          * IDEAL financial institutions
          */
 
-        $fis = \WirecardCEE_QMore_PaymentType::getFinancialInstitutions(\WirecardCEE_QMore_PaymentType::IDL);
+        $fis = \QentaCEE\QMore\PaymentType::getFinancialInstitutions(\QentaCEE\QMore\PaymentType::IDL);
 
         $idealFinancialInstitutions = [];
         foreach ($fis as $k => $v) {
@@ -173,7 +173,7 @@ class ConfigProvider implements ConfigProviderInterface
          * Trustpay financial institutions
          */
 
-        $fis = $this->_dataHelper->getFinancialInstitutions(\WirecardCEE_QMore_PaymentType::TRUSTPAY);
+        $fis = $this->_dataHelper->getFinancialInstitutions(\QentaCEE\QMore\PaymentType::TRUSTPAY);
 
         $trustpayFinancialInstitutions = [];
         foreach ($fis as $fi) {
@@ -223,7 +223,7 @@ class ConfigProvider implements ConfigProviderInterface
 
 
     /**
-     * Get wirecard payment type
+     * Get qenta payment type
      *
      * @param string $code
      *
@@ -242,7 +242,7 @@ class ConfigProvider implements ConfigProviderInterface
             return false;
         }
 
-        return $this->assetRepo->getUrlWithParams('Wirecard_CheckoutSeamless::images/' . $logo, ['_secure' => true]);
+        return $this->assetRepo->getUrlWithParams('Qenta_CheckoutSeamless::images/' . $logo, ['_secure' => true]);
     }
 }
 

@@ -2,8 +2,8 @@
 /**
  * Shop System Plugins - Terms of Use
  *
- * The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
- * (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+ * The plugins offered are provided free of charge by Qenta Central Eastern Europe GmbH
+ * (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
  * products and services.
  *
  * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
  * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
  * the same terms.
  *
- * However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+ * However, Qenta CEE does not provide any guarantee or accept any liability for any errors
  * occurring when used in an enhanced, customized shop system configuration.
  *
  * Operation in an enhanced, customized configuration is at your own risk and requires a
  * comprehensive test phase by the user of the plugin.
  *
- * Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
- * functionality neither does Wirecard CEE assume liability for any disadvantages related to
- * the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+ * Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+ * functionality neither does Qenta CEE assume liability for any disadvantages related to
+ * the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
  * for customized shop systems or installed plugins of other vendors of plugins within the same
  * shop system.
  *
@@ -30,7 +30,7 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Wirecard\CheckoutSeamless\Helper;
+namespace Qenta\CheckoutSeamless\Helper;
 
 class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -40,7 +40,7 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_url;
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Helper\Data
+     * @var \Qenta\CheckoutSeamless\Helper\Data
      */
     protected $_dataHelper;
 
@@ -65,7 +65,7 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Checkout\Model\Cart $cart,
-        \Wirecard\CheckoutSeamless\Helper\Data $dataHelper,
+        \Qenta\CheckoutSeamless\Helper\Data $dataHelper,
         \Magento\Framework\View\Asset\Repository $assetRepo
     ) {
         parent::__construct($context);
@@ -78,9 +78,9 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function init()
     {
-        $dataStorageInit = new \WirecardCEE_QMore_DataStorageClient($this->_dataHelper->getConfigArray());
+        $dataStorageInit = new \QentaCEE\QMore\DataStorageClient($this->_dataHelper->getConfigArray());
 
-        $returnUrl = $this->_url->getUrl('wirecardcheckoutseamless/storage/returnfallback', ['_secure' => true]);
+        $returnUrl = $this->_url->getUrl('qentacheckoutseamless/storage/returnfallback', ['_secure' => true]);
 
         $dataStorageInit->setReturnUrl($returnUrl);
         $dataStorageInit->setOrderIdent($this->_cart->getQuote()->getId());
@@ -90,7 +90,7 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
             $dataStorageInit->setJavascriptScriptVersion('pci3');
 
             if (strlen(trim($this->_dataHelper->getConfigData('ccard/iframe_css_url')))) {
-                $url = $this->_assetRepo->getUrlWithParams('Wirecard_CheckoutSeamless::css/' . trim($this->_dataHelper->getConfigData('ccard/iframe_css_url')), ['_secure' => true]);
+                $url = $this->_assetRepo->getUrlWithParams('Qenta_CheckoutSeamless::css/' . trim($this->_dataHelper->getConfigData('ccard/iframe_css_url')), ['_secure' => true]);
                 $dataStorageInit->setIframeCssUrl($url);
             }
 
@@ -114,7 +114,7 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 
             if (!$response->hasFailed()) {
 
-                $this->_cart->getCheckoutSession()->setWirecardCheckoutSeamlessStorageId($response->getStorageId());
+                $this->_cart->getCheckoutSession()->setQentaCheckoutSeamlessStorageId($response->getStorageId());
                 $this->_logger->debug(__METHOD__ . ':storageid:' . $response->getStorageId());
 
                 return $response->getJavascriptUrl();
@@ -138,11 +138,11 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @return bool|\WirecardCEE_QMore_DataStorage_Response_Read
+     * @return bool|\QentaCEE\QMore\DataStorage\Response\Read
      */
     public function read()
     {
-        $dataStorageRead = new \WirecardCEE_QMore_DataStorageClient($this->_dataHelper->getConfigArray());
+        $dataStorageRead = new \QentaCEE\QMore\DataStorageClient($this->_dataHelper->getConfigArray());
         $dataStorageRead->setStorageId($this->getStorageId());
         $dataStorageRead->read();
 
@@ -150,7 +150,7 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 
             $response = $dataStorageRead->read();
 
-            if ($response->getStatus() != \WirecardCEE_QMore_DataStorage_Response_Read::STATE_FAILURE) {
+            if ($response->getStatus() != \QentaCEE\QMore\DataStorage\Response\Read::STATE_FAILURE) {
 
                 return $response;
 
@@ -175,6 +175,6 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getStorageId()
     {
-        return $this->_cart->getCheckoutSession()->getWirecardCheckoutSeamlessStorageId();
+        return $this->_cart->getCheckoutSession()->getQentaCheckoutSeamlessStorageId();
     }
 }

@@ -1,27 +1,26 @@
 {
-  "name": "wirecard/magento2-wcs",
-  "description": "Wirecard Checkout Seamless",
+  "name": "qenta/magento2-wcs",
+  "description": "Qenta Checkout Seamless",
   "type": "magento2-module",
-  "version": "1.0.14",
+  "homepage": "https://www.qenta-cee.at",
+  "version":"2.0.0",
+  "support": {
+    "email": "support@qenta.com",
+    "docs": "https://guides.wirecard.com"
+},
   "license": [
     "MIT"
   ],
   "require": {
-    "php": "~5.6.0|~7.0",
-    "magento/magento-composer-installer": "*",
-    "magento/module-checkout-agreements": "*",
-    "magento/module-sales": "*",
-    "magento/module-payment": "*",
-    "magento/module-quote": "*",
-    "wirecard/checkout-client-library": "3.3.5",
-    "wirecard/magento2-ee-compat": "^1.0.0 || ^2.0.0"
+    "php": "~7.3.0",
+    "qenta/checkout-client-library": "5.0.0"
   },
   "autoload": {
     "files": [
       "registration.php"
     ],
     "psr-4": {
-      "Wirecard\\CheckoutSeamless\\": ""
+      "Qenta\\CheckoutSeamless\\": ""
     }
   }
 }
