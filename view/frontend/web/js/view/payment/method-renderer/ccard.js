@@ -108,7 +108,7 @@ define(
             },
             initPci3DssSaqIframe: function (container) {
                 var paymentMethod = this.getPaymentMethod(),
-                    wdcee = new QentaCEE_DataStorage();
+                    wdcee = new WirecardCEE_DataStorage();
                 if (paymentMethod=='CCARD')
                     wdcee.buildIframeCreditCard($(container).attr('id'), '100%', '400px');
                 else if (paymentMethod=='MAESTRO')
@@ -199,7 +199,7 @@ define(
                     fullScreenLoader.startLoader();
 
                     if (paymentMethod == 'MAESTRO') {
-                        var mDataStorage = new QentaCEE_DataStorage();
+                        var mDataStorage = new WirecardCEE_DataStorage();
                         mDataStorage.storeMaestroInformation(ccData, function (response) {
                             fullScreenLoader.stopLoader();
                             if (response.getStatus() == 0) {
@@ -210,7 +210,7 @@ define(
                             }
                         });
                     } else if (paymentMethod == 'CCARD') {
-                        var ccDataStorage = new QentaCEE_DataStorage();
+                        var ccDataStorage = new WirecardCEE_DataStorage();
                         ccDataStorage.storeCreditCardInformation(ccData, function (response) {
                             fullScreenLoader.stopLoader();
                             if (response.getStatus() == 0) {
@@ -221,7 +221,7 @@ define(
                             }
                         });
                     } else if (paymentMethod == 'CCARD-MOTO') {
-                        var cmDataStorage = new QentaCEE_DataStorage();
+                        var cmDataStorage = new WirecardCEE_DataStorage();
                         cmDataStorage.storeCreditCardMotoInformation(ccData, function (response) {
                             fullScreenLoader.stopLoader();
                             if (response.getStatus() == 0) {

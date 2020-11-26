@@ -50,7 +50,7 @@ define(
 
             store: function (data, messageContainer, onSuccess, onError) {
                 var self = this;
-                var qentaCee = new QentaCEE_DataStorage;
+                var qentaCee = new WirecardCEE_DataStorage;
                 var request = qentaCee.storePaymentInformation(data, function (response) {
 
                     if (response.getErrors()) {
@@ -77,7 +77,7 @@ define(
                                     messageContainer.addErrorMessage({'message': 'no stored paymentinformation found!'});
                                     onError(response);
                                 } else {
-                                    var ret = new QentaCEE_Response(response);
+                                    var ret = new WirecardCEE_Response(response);
                                     onSuccess(ret);
                                 }
                             })
