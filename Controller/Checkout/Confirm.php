@@ -35,9 +35,11 @@ namespace Qenta\CheckoutSeamless\Controller\Checkout;
 use Magento\Checkout\Model\Cart as CheckoutCart;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\App\CsrfAwareActionInterface;
+use Qenta\CheckoutSeamless\Controller\NoCsrfTrait;
 
 class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareActionInterface
 {
+    use NoCsrfTrait;
 
     /**
      * @var \Magento\Framework\HTTP\PhpEnvironment\Request
