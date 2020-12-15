@@ -83,7 +83,7 @@ class Submit extends \Magento\Backend\App\Action
         $postObject->setData($data);
 
 
-        $this->_session->setQentaCheckoutSeamlessFundTrandsferFormData($postObject);
+        $this->_session->setWirecardCheckoutSeamlessFundTrandsferFormData($postObject);
 
         try {
             $return = $this->_fundTransferModel->sendrequest($postObject);
@@ -93,7 +93,7 @@ class Submit extends \Magento\Backend\App\Action
                 }
             } else {
                 $this->_logger->debug(__METHOD__ . ':' . print_r($postObject->getData(), true));
-                $this->_session->unsQentaCheckoutSeamlessFundTrandsferFormData();
+                $this->_session->unsWirecardCheckoutSeamlessFundTrandsferFormData();
                 $this->messageManager->addNoticeMessage($this->_dataHelper->__('Fund transfer submitted successfully!'));
                 $this->messageManager->addNoticeMessage($this->_dataHelper->__('Credit number' . ':' . $return->getCreditNumber()));
             }

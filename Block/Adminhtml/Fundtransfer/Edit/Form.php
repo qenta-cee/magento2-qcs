@@ -239,7 +239,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
         $form->setValues(['currency' => 'EUR']);
 
         /** @var \Magento\Framework\DataObject $dataObject */
-        $dataObject = $this->_backendSession->getQentaCheckoutSeamlessFundTrandsferFormData();
+        $dataObject = $this->_backendSession->getWirecardCheckoutSeamlessFundTrandsferFormData();
 
         if (is_object($dataObject)) {
             $form->setValues($dataObject->getData());

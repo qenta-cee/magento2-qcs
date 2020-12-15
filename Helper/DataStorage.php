@@ -114,7 +114,7 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 
             if (!$response->hasFailed()) {
 
-                $this->_cart->getCheckoutSession()->setQentaCheckoutSeamlessStorageId($response->getStorageId());
+                $this->_cart->getCheckoutSession()->setWirecardCheckoutSeamlessStorageId($response->getStorageId());
                 $this->_logger->debug(__METHOD__ . ':storageid:' . $response->getStorageId());
 
                 return $response->getJavascriptUrl();
@@ -175,6 +175,6 @@ class DataStorage extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getStorageId()
     {
-        return $this->_cart->getCheckoutSession()->getQentaCheckoutSeamlessStorageId();
+        return $this->_cart->getCheckoutSession()->getWirecardCheckoutSeamlessStorageId();
     }
 }
