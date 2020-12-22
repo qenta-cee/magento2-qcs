@@ -9,7 +9,7 @@
 
 Qenta Checkout Seamless extension for Magento 2.3 and Magento 2.4
 
-Our [Online Guides](https://guides.wirecard.com/) provide further information on payment methods and additional features. Please observe our [terms of use](https://guides.wirecard.at/shop_plugins:info#terms_of_use) regarding plugins.
+Our [Online Guides](https://guides.qenta.com/) provide further information on payment methods and additional features. Please observe our [terms of use](https://guides.qenta.at/shop_plugins:info#terms_of_use) regarding plugins.
 
 ## Qenta Checkout Seamless
 Qenta Checkout Seamless is designed to meet the ambitious demands of merchants offering a wide range of payment methods while at the same time fulfilling PCI DSS compliance.
