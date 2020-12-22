@@ -2,8 +2,8 @@
 /**
  * Shop System Plugins - Terms of Use
  *
- * The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
- * (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+ * The plugins offered are provided free of charge by Qenta Payment CEE GmbH
+ * (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
  * products and services.
  *
  * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
  * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
  * the same terms.
  *
- * However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+ * However, Qenta CEE does not provide any guarantee or accept any liability for any errors
  * occurring when used in an enhanced, customized shop system configuration.
  *
  * Operation in an enhanced, customized configuration is at your own risk and requires a
  * comprehensive test phase by the user of the plugin.
  *
- * Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
- * functionality neither does Wirecard CEE assume liability for any disadvantages related to
- * the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+ * Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+ * functionality neither does Qenta CEE assume liability for any disadvantages related to
+ * the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
  * for customized shop systems or installed plugins of other vendors of plugins within the same
  * shop system.
  *
@@ -30,12 +30,12 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Wirecard\CheckoutSeamless\Controller\Checkout;
+namespace Qenta\CheckoutSeamless\Controller\Checkout;
 
 use Magento\Checkout\Model\Cart as CheckoutCart;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\App\CsrfAwareActionInterface;
-use Wirecard\ElasticEngine\Controller\Frontend\NoCsrfTrait;
+use Qenta\CheckoutSeamless\Controller\NoCsrfTrait;
 
 class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareActionInterface
 {
@@ -47,7 +47,7 @@ class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $_request;
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Helper\Data
+     * @var \Qenta\CheckoutSeamless\Helper\Data
      */
     protected $_dataHelper;
 
@@ -67,25 +67,25 @@ class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareA
     protected $_quoteManagement;
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Model\OrderManagement
+     * @var \Qenta\CheckoutSeamless\Model\OrderManagement
      */
     protected $_orderManagement;
 
 
     /**
      * @param \Magento\Framework\App\Action\Context $context
-     * @param \Wirecard\CheckoutSeamless\Helper\Data $dataHelper
+     * @param \Qenta\CheckoutSeamless\Helper\Data $dataHelper
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Quote\Api\CartManagementInterface $quoteManagement
-     * @param \Wirecard\CheckoutSeamless\Model\OrderManagement $orderManagement
+     * @param \Qenta\CheckoutSeamless\Model\OrderManagement $orderManagement
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Wirecard\CheckoutSeamless\Helper\Data $dataHelper,
+        \Qenta\CheckoutSeamless\Helper\Data $dataHelper,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Quote\Api\CartManagementInterface $quoteManagement,
-        \Wirecard\CheckoutSeamless\Model\OrderManagement $orderManagement
+        \Qenta\CheckoutSeamless\Model\OrderManagement $orderManagement
     ) {
         parent::__construct($context);
         $this->_dataHelper      = $dataHelper;
@@ -101,7 +101,7 @@ class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
         try {
             $this->_logger->debug(__METHOD__ . $this->_request->getContent());
-            $return = \WirecardCEE_QMore_ReturnFactory::getInstance($this->_request->getPost()->toArray(),
+            $return = \QentaCEE\QMore\ReturnFactory::getInstance($this->_request->getPost()->toArray(),
                 $this->_dataHelper->getConfigData('basicdata/secret'));
 
             $error = "";
@@ -118,17 +118,17 @@ class Confirm extends \Magento\Framework\App\Action\Action implements CsrfAwareA
             }
 
             if (strlen($error)) {
-                die(\WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($error));
+                die(\QentaCEE\QMore\ReturnFactory::generateConfirmResponseString($error));
             }
 
             $this->_orderManagement->processOrder($return);
 
-            die(\WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString());
+            die(\QentaCEE\QMore\ReturnFactory::generateConfirmResponseString());
         } catch (\Exception $e) {
             $this->_logger->debug(__METHOD__ . ':' . $e->getMessage());
             $this->_logger->debug(__METHOD__ . ':' . $e->getTraceAsString());
 
-            die(\WirecardCEE_QMore_ReturnFactory::generateConfirmResponseString($e->getMessage()));
+            die(\QentaCEE\QMore\ReturnFactory::generateConfirmResponseString($e->getMessage()));
         }
     }
 }

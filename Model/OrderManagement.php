@@ -2,8 +2,8 @@
 /**
  * Shop System Plugins - Terms of Use
  *
- * The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
- * (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+ * The plugins offered are provided free of charge by Qenta Payment CEE GmbH
+ * (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
  * products and services.
  *
  * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
  * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
  * the same terms.
  *
- * However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+ * However, Qenta CEE does not provide any guarantee or accept any liability for any errors
  * occurring when used in an enhanced, customized shop system configuration.
  *
  * Operation in an enhanced, customized configuration is at your own risk and requires a
  * comprehensive test phase by the user of the plugin.
  *
- * Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
- * functionality neither does Wirecard CEE assume liability for any disadvantages related to
- * the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+ * Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+ * functionality neither does Qenta CEE assume liability for any disadvantages related to
+ * the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
  * for customized shop systems or installed plugins of other vendors of plugins within the same
  * shop system.
  *
@@ -30,7 +30,7 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Wirecard\CheckoutSeamless\Model;
+namespace Qenta\CheckoutSeamless\Model;
 
 use Magento\Checkout\Model\Cart as CheckoutCart;
 use Magento\Quote\Model\Quote;
@@ -39,7 +39,7 @@ use Magento\Sales\Model\Order\Payment\Transaction;
 
 class OrderManagement
 {
-    /** @var \Wirecard\CheckoutSeamless\Helper\Data */
+    /** @var \Qenta\CheckoutSeamless\Helper\Data */
     protected $_dataHelper = null;
 
     /**
@@ -84,7 +84,7 @@ class OrderManagement
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
-        \Wirecard\CheckoutSeamless\Helper\Data $helper,
+        \Qenta\CheckoutSeamless\Helper\Data $helper,
         \Magento\Sales\Model\Order\Payment\Transaction\BuilderInterface $transactionBuilder,
         \Magento\Sales\Model\Order\Email\Sender\OrderSender $orderSender,
         \Magento\Sales\Api\TransactionRepositoryInterface $transactionRepository,
@@ -124,12 +124,12 @@ class OrderManagement
     /**
      * Process order, create/update/cancel/delete order depending on config and order state
      *
-     * @param \WirecardCEE_Stdlib_Return_ReturnAbstract $return
+     * @param \QentaCEE\Stdlib\Returns\ReturnAbstract $return
      *
      * @return Order|null
      * @throws \Exception
      */
-    public function processOrder(\WirecardCEE_Stdlib_Return_ReturnAbstract $return)
+    public function processOrder(\QentaCEE\Stdlib\Returns\ReturnAbstract $return)
     {
         $quoteId = $return->mage_quoteId;
 
@@ -151,8 +151,8 @@ class OrderManagement
             }
 
             switch ($return->getPaymentState()) {
-                case \WirecardCEE_QMore_ReturnFactory::STATE_SUCCESS:
-                case \WirecardCEE_QMore_ReturnFactory::STATE_PENDING:
+                case \QentaCEE\QMore\ReturnFactory::STATE_SUCCESS:
+                case \QentaCEE\QMore\ReturnFactory::STATE_PENDING:
                     /* after a pending payment, order might have been processed manually */
                     /* just save transaction but dont update order */
                     if ($this->isOrderProcessed($order)) {
@@ -162,8 +162,8 @@ class OrderManagement
                     }
                     break;
 
-                case \WirecardCEE_QMore_ReturnFactory::STATE_CANCEL:
-                case \WirecardCEE_QMore_ReturnFactory::STATE_FAILURE:
+                case \QentaCEE\QMore\ReturnFactory::STATE_CANCEL:
+                case \QentaCEE\QMore\ReturnFactory::STATE_FAILURE:
                     // ev. set review state
                     //$order->setState(\Magento\Sales\Model\Order::STATE_PAYMENT_REVIEW);
                     if (!$this->isOrderProcessed($order)) {
@@ -177,8 +177,8 @@ class OrderManagement
 
             switch ($return->getPaymentState()) {
 
-                case \WirecardCEE_QMore_ReturnFactory::STATE_SUCCESS:
-                case \WirecardCEE_QMore_ReturnFactory::STATE_PENDING:
+                case \QentaCEE\QMore\ReturnFactory::STATE_SUCCESS:
+                case \QentaCEE\QMore\ReturnFactory::STATE_PENDING:
                     $fraudDetected = false;
                     if (!$orderExists) {
                         $order         = $this->submitOrder($quote);
@@ -195,8 +195,8 @@ class OrderManagement
                     }
                     break;
 
-                case \WirecardCEE_QMore_ReturnFactory::STATE_CANCEL:
-                case \WirecardCEE_QMore_ReturnFactory::STATE_FAILURE:
+                case \QentaCEE\QMore\ReturnFactory::STATE_CANCEL:
+                case \QentaCEE\QMore\ReturnFactory::STATE_FAILURE:
                     /* save some data to additional info because within the return request we have no */
                     /* information about the payment */
                     $quote->getPayment()->setAdditionalInformation($return->getReturned());
@@ -233,7 +233,7 @@ class OrderManagement
         $history     = $order->getAllStatusHistory();
         $paymentInst = $order->getPayment()->getMethodInstance();
         if ($paymentInst) {
-            if (strpos($paymentInst->getCode(), 'wirecard') === false) {
+            if (strpos($paymentInst->getCode(), 'qenta') === false) {
                 return true;
             }
             foreach ($history AS $entry) {
@@ -264,7 +264,7 @@ class OrderManagement
      * Keep the failed order
      *
      * @param \Magento\Sales\Model\Order $order
-     * @param \WirecardCEE_Stdlib_Return_ReturnAbstract $return
+     * @param \QentaCEE\Stdlib\Returns\ReturnAbstract $return
      *
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -312,7 +312,7 @@ class OrderManagement
      * Confirm the payment of an order
      *
      * @param \Magento\Sales\Model\Order $order
-     * @param \WirecardCEE_Stdlib_Return_ReturnAbstract $return
+     * @param \QentaCEE\Stdlib\Returns\ReturnAbstract $return
      * @param bool $fraudDetected
      *
      * @return Order
@@ -324,7 +324,7 @@ class OrderManagement
         /** @var \Magento\Sales\Model\Order\Payment $payment */
         $payment = $order->getPayment();
 
-        /** @var \Wirecard\CheckoutSeamless\Model\AbstractPayment $paymentInstance */
+        /** @var \Qenta\CheckoutSeamless\Model\AbstractPayment $paymentInstance */
         $paymentInstance = $payment->getMethodInstance();
 
         $additionalInformation = Array();
@@ -342,12 +342,12 @@ class OrderManagement
 
         $doCapture = false;
         if (!$this->isOrderProcessed($order)) {
-            if ($return->getPaymentState() == \WirecardCEE_QMore_ReturnFactory::STATE_PENDING) {
-                /** @var \WirecardCEE_QMore_Return_Pending $return */
+            if ($return->getPaymentState() == \QentaCEE\QMore\ReturnFactory::STATE_PENDING) {
+                /** @var \QentaCEE\QMore\Returns\Pending $return */
                 $order->setState(\Magento\Sales\Model\Order::STATE_PENDING_PAYMENT);
                 $message = $this->_dataHelper->__('The payment authorization is pending.');
             } else {
-                /** @var \WirecardCEE_QMore_Return_Success $return */
+                /** @var \QentaCEE\QMore\Returns\Success $return */
                 $order->setState(\Magento\Sales\Model\Order::STATE_PROCESSING);
                 $order->setStatus(\Magento\Sales\Model\Order::STATE_PROCESSING);
                 $message = $this->_dataHelper->__('The payment has been successfully completed.');
@@ -363,7 +363,7 @@ class OrderManagement
 
 			            $orderDetails = $paymentInstance->getOrderDetails( $payment->getAdditionalInformation( 'orderNumber' ) );
 			            foreach ( $orderDetails->getOrder()->getPayments() as $wdPayment ) {
-				            /** @var \WirecardCEE_QMore_Response_Backend_Order_Payment $wdPayment */
+				            /** @var \QentaCEE\QMore\Response\Backend\Order\Payment $wdPayment */
 
 				            $this->_logger->debug(
 					            __METHOD__ . ':payment-state:' . $wdPayment->getState() . ' allowed operations:' . implode(
@@ -408,7 +408,7 @@ class OrderManagement
      * @param $type
      * @param $message
      * @param Order $order
-     * @param \WirecardCEE_Stdlib_Return_ReturnAbstract $return
+     * @param \QentaCEE\Stdlib\Returns\ReturnAbstract $return
      *
      * @return \Magento\Sales\Api\Data\TransactionInterface|null
      */
@@ -423,7 +423,7 @@ class OrderManagement
         $payment = $order->getPayment();
 
         $tid = '';
-        if ($return instanceof \WirecardCEE_Stdlib_Return_Success) {
+        if ($return instanceof \QentaCEE\Stdlib\Returns\Success) {
             $tid = $return->getGatewayReferenceNumber();
         }
         /* generate dummy GwRef for pending payments */

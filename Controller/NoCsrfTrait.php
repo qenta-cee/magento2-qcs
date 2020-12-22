@@ -30,38 +30,27 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Qenta\CheckoutSeamless\Model\Payment;
+namespace Qenta\CheckoutSeamless\Controller;
 
-use Qenta\CheckoutSeamless\Model\AbstractPayment;
+use Magento\Framework\App\Request\InvalidRequestException;
+use Magento\Framework\App\RequestInterface;
 
-class Ideal extends AbstractPayment
+trait NoCsrfTrait
 {
-    const CODE = 'qenta_checkoutseamless_ideal';
-    protected $_code = self::CODE;
-
-    protected $_paymentMethod = \QentaCEE\Stdlib\PaymentTypeAbstract::IDL;
-
-    protected $_logo = 'ideal.png';
+    /**
+     * @inheritDoc
+     */
+    public function createCsrfValidationException(
+        RequestInterface $request
+    ): ?InvalidRequestException {
+        return null;
+    }
 
     /**
-     * Assign data to info model instance
-     *
-     * @param array|\Magento\Framework\DataObject $data
-     * @return $this
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @api
+     * @inheritDoc
      */
-    public function assignData(\Magento\Framework\DataObject $data)
+    public function validateForCsrf(RequestInterface $request): ?bool
     {
-        parent::assignData($data);
-        if (!$data instanceof \Magento\Framework\DataObject) {
-            $data = new \Magento\Framework\DataObject($data);
-        }
-
-        /** @var \Magento\Quote\Model\Quote\Payment $infoInstance */
-        $infoInstance = $this->getInfoInstance();
-        $infoInstance->setAdditionalInformation('financialInstitution', $data->getDataByPath('additional_data/financialInstitution'));
-
-        return $this;
+        return true;
     }
 }

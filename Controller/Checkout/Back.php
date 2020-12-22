@@ -2,8 +2,8 @@
 /**
  * Shop System Plugins - Terms of Use
  *
- * The plugins offered are provided free of charge by Wirecard Central Eastern Europe GmbH
- * (abbreviated to Wirecard CEE) and are explicitly not part of the Wirecard CEE range of
+ * The plugins offered are provided free of charge by Qenta Payment CEE GmbH
+ * (abbreviated to Qenta CEE) and are explicitly not part of the Qenta CEE range of
  * products and services.
  *
  * They have been tested and approved for full functionality in the standard configuration
@@ -11,15 +11,15 @@
  * License Version 2 (GPLv2) and can be used, developed and passed on to third parties under
  * the same terms.
  *
- * However, Wirecard CEE does not provide any guarantee or accept any liability for any errors
+ * However, Qenta CEE does not provide any guarantee or accept any liability for any errors
  * occurring when used in an enhanced, customized shop system configuration.
  *
  * Operation in an enhanced, customized configuration is at your own risk and requires a
  * comprehensive test phase by the user of the plugin.
  *
- * Customers use the plugins at their own risk. Wirecard CEE does not guarantee their full
- * functionality neither does Wirecard CEE assume liability for any disadvantages related to
- * the use of the plugins. Additionally, Wirecard CEE does not guarantee the full functionality
+ * Customers use the plugins at their own risk. Qenta CEE does not guarantee their full
+ * functionality neither does Qenta CEE assume liability for any disadvantages related to
+ * the use of the plugins. Additionally, Qenta CEE does not guarantee the full functionality
  * for customized shop systems or installed plugins of other vendors of plugins within the same
  * shop system.
  *
@@ -30,7 +30,7 @@
  * Please do not use the plugin if you do not agree to these terms of use!
  */
 
-namespace Wirecard\CheckoutSeamless\Controller\Checkout;
+namespace Qenta\CheckoutSeamless\Controller\Checkout;
 
 use Magento\Checkout\Model\Cart as CheckoutCart;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
@@ -43,7 +43,7 @@ class Back extends \Magento\Framework\App\Action\Action
     protected $_request;
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Helper\Data
+     * @var \Qenta\CheckoutSeamless\Helper\Data
      */
     protected $_dataHelper;
 
@@ -93,14 +93,14 @@ class Back extends \Magento\Framework\App\Action\Action
     protected $_resultPageFactory;
 
     /**
-     * @var \Wirecard\CheckoutSeamless\Model\OrderManagement
+     * @var \Qenta\CheckoutSeamless\Model\OrderManagement
      */
     protected $_orderManagement;
 
     /**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Wirecard\CheckoutSeamless\Helper\Data $helper
+     * @param \Qenta\CheckoutSeamless\Helper\Data $helper
      * @param CheckoutCart $cart
      * @param \Magento\Sales\Model\Order $order
      * @param \Magento\Sales\Model\Order\Email\Sender\OrderSender $orderSender
@@ -108,13 +108,13 @@ class Back extends \Magento\Framework\App\Action\Action
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Magento\Quote\Api\CartManagementInterface $quoteManagement
      * @param \Magento\Quote\Api\CartRepositoryInterface $quoteRepository
-     * @param \Wirecard\CheckoutSeamless\Model\OrderManagement $orderManagement
+     * @param \Qenta\CheckoutSeamless\Model\OrderManagement $orderManagement
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Wirecard\CheckoutSeamless\Helper\Data $helper,
+        \Qenta\CheckoutSeamless\Helper\Data $helper,
         CheckoutCart $cart,
         \Magento\Sales\Model\Order $order,
         \Magento\Sales\Model\Order\Email\Sender\OrderSender $orderSender,
@@ -122,7 +122,7 @@ class Back extends \Magento\Framework\App\Action\Action
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Quote\Api\CartManagementInterface $quoteManagement,
 	    \Magento\Quote\Api\CartRepositoryInterface $quoteRepository,
-        \Wirecard\CheckoutSeamless\Model\OrderManagement $orderManagement
+        \Qenta\CheckoutSeamless\Model\OrderManagement $orderManagement
     ) {
         parent::__construct($context);
         $this->_resultPageFactory = $resultPageFactory;
@@ -190,9 +190,9 @@ class Back extends \Magento\Framework\App\Action\Action
             } else {
 
                 switch ($paymentInfo['paymentState']) {
-                    case \WirecardCEE_QMore_ReturnFactory::STATE_SUCCESS:
-                    case \WirecardCEE_QMore_ReturnFactory::STATE_PENDING:
-                        if ($paymentInfo['paymentState'] == \WirecardCEE_QMore_ReturnFactory::STATE_PENDING) {
+                    case \QentaCEE\QMore\ReturnFactory::STATE_SUCCESS:
+                    case \QentaCEE\QMore\ReturnFactory::STATE_PENDING:
+                        if ($paymentInfo['paymentState'] == \QentaCEE\QMore\ReturnFactory::STATE_PENDING) {
                             $this->messageManager->addNoticeMessage($this->_dataHelper->__('Your order will be processed as soon as we receive the payment confirmation from your bank.'));
                         }
 
@@ -206,7 +206,7 @@ class Back extends \Magento\Framework\App\Action\Action
                         $redirectTo = 'checkout/onepage/success';
                         break;
 
-                    case \WirecardCEE_QMore_ReturnFactory::STATE_CANCEL:
+                    case \QentaCEE\QMore\ReturnFactory::STATE_CANCEL:
                         $this->messageManager->addNoticeMessage($this->_dataHelper->__('You have canceled the payment process!'));
                         if ($orderCreation == 'before') {
                             $quote = $this->_orderManagement->reOrder($quoteId);
@@ -214,7 +214,7 @@ class Back extends \Magento\Framework\App\Action\Action
                         }
                         break;
 
-                    case \WirecardCEE_QMore_ReturnFactory::STATE_FAILURE:
+                    case \QentaCEE\QMore\ReturnFactory::STATE_FAILURE:
                         $returnedData = $paymentInfo->getData();
                         $consumerMessage = "";
                         for ($i = 0; $i < $returnedData['errors']; $i++) {
@@ -246,7 +246,7 @@ class Back extends \Magento\Framework\App\Action\Action
                         break;
 
                     default:
-                        throw new \Exception('Unhandled Wirecard Checkout Seamless payment state:' . $paymentInfo['consumerMessage']);
+                        throw new \Exception('Unhandled Qenta Checkout Seamless payment state:' . $paymentInfo['consumerMessage']);
                 }
             }
 
