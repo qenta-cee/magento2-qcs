@@ -5,7 +5,6 @@
 [![PHP v7.3](https://img.shields.io/badge/php-v7.3-yellow.svg)](http://www.php.net)
 [![PHP v7.4](https://img.shields.io/badge/php-v7.4-yellow.svg)](http://www.php.net)
 [![Magento v2.3.6](https://img.shields.io/badge/magento-v2.3.6-green.svg)](https://magento.com/)
-[![Magento v2.4.1](https://img.shields.io/badge/magento-v2.4.1-green.svg)](https://magento.com/)
 
 
 Qenta Checkout Seamless extension for Magento 2.3 and Magento 2.4
