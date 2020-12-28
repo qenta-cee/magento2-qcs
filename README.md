@@ -7,7 +7,7 @@
 [![Magento v2.3.6](https://img.shields.io/badge/magento-v2.3.6-green.svg)](https://magento.com/)
 
 
-Qenta Checkout Seamless extension for Magento 2.3 and Magento 2.4
+Qenta Checkout Seamless extension for Magento 2.3 
 
 Our [Online Guides](https://guides.qenta.com/) provide further information on payment methods and additional features. Please observe our [terms of use](https://guides.qenta.at/shop_plugins:info#terms_of_use) regarding plugins.
 
